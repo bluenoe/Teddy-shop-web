@@ -4,8 +4,8 @@
 window.bemoriHeader = {
   initHeaderEvents: function () {
     // 1. Sử dụng đúng ID từ header.html
-    const hamburgerBtn = document.getElementById("mobile-menu-button");
-    const navMenu = document.getElementById("mobile-menu");
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const navMenu = document.getElementById("navMenu");
 
     // 2. Kiểm tra tồn tại phần tử
     if (!hamburgerBtn || !navMenu) {

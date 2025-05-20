@@ -462,13 +462,6 @@
     transition: all 0.2s ease;
   }
 
-  /* Mobile user dropdown adjustments */
-  @media (max-width: 767px) {
-    #userDropdownMobile {
-      right: -1rem;
-    }
-  }
-
   /* Mobile menu styles */
   @media (max-width: 767px) {
     .group {
@@ -491,6 +484,22 @@
     }
   }
 
+  /* Mobile navigation overlay */
+  .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .nav-overlay.active {
+    display: block;
+  }
+
   /* Dropdown menu improvements */
   .dropdown-menu {
     width: min(800px, 90vw);
@@ -500,10 +509,12 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
-  /* Center dropdown menu */
-  .dropdown-menu {
-    left: 50%;
-    transform: translateX(-50%);
+  /* Center dropdown menu - only on desktop */
+  @media (min-width: 768px) {
+    .dropdown-menu {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   /* Grid layout improvements */
@@ -536,9 +547,16 @@
     text-overflow: ellipsis;
   }
 
-  .dropdown-menu li a:hover {
-    color: #db2777;
-    transform: translateX(4px);
+  .dropdown-menu li a:hover {}
+</style>
+
+<!-- Include mobile menu JavaScript -->
+<script src="javascript:void(0);"
+  onerror="this.src = window.location.pathname.includes('/pages/') ? '../assets/js/mobile-menu.js' : 'assets/js/mobile-menu.js'"></script>
+
+<style>
+  color: #db2777;
+  transform: translateX(4px);
   }
 
   /* Close button for mobile menu */
