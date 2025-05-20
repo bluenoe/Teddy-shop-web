@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danh sách yêu thích | BEMORI</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+
+  <!-- Auth Links Styling -->
+  <style>
+    /* Đảm bảo màu sắc auth-links đồng nhất */
+    .auth-links a,
+    .auth-links-mobile a,
+    .auth-links span,
+    .auth-links-mobile span {
+      color: #db2777 !important;
+      /* text-pink-600 */
+      font-weight: 600 !important;
+    }
+
+    body {
+      background-color: #f9fafb;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .wishlist-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .page-title {
+      position: relative;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-title h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #db2777 0%, #ec4899 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 10px;
+      filter: drop-shadow(2px 2px 0 rgba(219, 39, 119, 0.1));
+    }
+
+    .page-title .subtitle {
+      font-size: 1.1rem;
+      color: #6b7280;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .page-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, #db2777, #ec4899);
+      margin: 15px auto 0;
+      border-radius: 2px;
+    }
+
+    .wishlist-empty {
+      text-align: center;
+      padding: 60px 20px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .wishlist-empty:hover {
+      transform: translateY(-5px);
+    }
+
+    .wishlist-empty i {
+      font-size: 5rem;
+      color: #fecdd3;
+      margin-bottom: 20px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .wishlist-empty h2 {
+      font-size: 1.8rem;
+      color: #111827;
+      margin-bottom: 15px;
+    }
+
+    .wishlist-empty p {
+      color: #6b7280;
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .shop-now-btn {
+      display: inline-block;
+      background-color: #db2777;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(219, 39, 119, 0.2);
+    }
+
+    .shop-now-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(219, 39, 119, 0.3);
+      background-color: #be185d;
+    }
+
+    .shop-now-btn i {
+      margin-left: 8px;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease;
+    }
+
+    .shop-now-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    .wishlist-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1024px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .page-title h1 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wishlist-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-title h1 {
+        font-size: 2rem;
+      }
+
+      .page-title .subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wishlist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-title h1 {
+        font-size: 1.75rem;
+      }
+
+      .wishlist-empty i {
+        font-size: 4rem;
+      }
+
+      .wishlist-empty h2 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .wishlist-item {
+      background-color: white;
+      border-radius: 15px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .wishlist-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .wishlist-img-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+    }
+
+    .wishlist-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .wishlist-item:hover .wishlist-img {
+      transform: scale(1.1);
+    }
+
+    .wishlist-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #db2777;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(219, 39, 119, 0.3);
+    }
+
+    .wishlist-body {
+      padding: 15px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wishlist-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 44px;
+    }
+
+    .wishlist-price {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .current-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #db2777;
+    }
+
+    .old-price {
+      font-size: 14px;
+      color: #9ca3af;
+      text-decoration: line-through;
+      margin-left: 8px;
+    }
+
+    .wishlist-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      background: #db2777;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .add-to-cart:hover {
+      background: #be185d;
+      transform: translateY(-2px);
+    }
+
+    .remove-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      border: none;
+      color: #6b7280;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .remove-btn:hover {
+      background: #fee2e2;
+      color: #ef4444;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #db2777;
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: #be185d;
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(219, 39, 119, 0.3);
+    }
+
+    /* Quick Navigation Sidebar */
+    .quick-nav {
+      position: fixed;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 15px 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .quick-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+      color: #ff4444;
+      font-size: 11px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .quick-nav-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .quick-nav-item:hover i {
+      background-color: #ff4444;
+      color: white;
+    }
+
+    .quick-nav-item i {
+      font-size: 18px;
+      margin-bottom: 6px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff1f1;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(255, 68, 68, 0.1);
+    }
+
+    .quick-nav-item span {
+      font-weight: 500;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+  <div id="siteHeader"></div>
+
+  <!-- Main Content -->
+  <div class="wishlist-container py-10">
+    <div class="page-title">
+      <h1>Danh sách yêu thích</h1>
+      <p class="subtitle">Những sản phẩm bạn yêu thích được lưu lại tại đây. Thêm vào giỏ hàng ngay hoặc để dành mua
+        sau.</p>
+    </div>
+
+    <!-- Wishlist Items -->
+    <div class="wishlist-grid hidden">
+      <!-- Wishlist items will be dynamically added here -->
+    </div>
+
+    <!-- Empty Wishlist -->
+    <div class="wishlist-empty">
+      <i class="far fa-heart empty-heart"></i>
+      <h2>Danh sách yêu thích của bạn đang trống</h2>
+      <p>Hãy thêm sản phẩm yêu thích vào danh sách để dễ dàng theo dõi và mua sau</p>
+      <a href="shop.html" class="shop-now-btn">
+        Mua sắm ngay <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="siteFooter"></div>
+
+  <!-- Quick Navigation Sidebar -->
+  <div class="quick-nav hidden md:block">
+    <a href="index.html" class="quick-nav-item" title="Trang chủ">
+      <i class="fas fa-home"></i>
+      <span>Trang chủ</span>
+    </a>
+    <a href="index.html#gau-bong-hot-trend-products" class="quick-nav-item" title="Hot Trend">
+      <i class="fas fa-fire"></i>
+      <span>Hot Trend</span>
+    </a>
+    <a href="wishlist.html" class="quick-nav-item" title="Yêu thích">
+      <i class="fas fa-heart"></i>
+      <span>Yêu thích</span>
+    </a>
+    <a href="sale.html" class="quick-nav-item" title="Giảm giá">
+      <i class="fas fa-tags"></i>
+      <span>Giảm giá</span>
+    </a>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button
+    class="back-to-top fixed bottom-8 right-8 w-12 h-12 rounded-full bg-pink-500 text-white shadow-lg flex items-center justify-center transition-all opacity-0 invisible"
+    aria-label="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Load products from JSON
+      fetch('../assets/data/products.json')
+        .then(response => response.json())
+        .then(data => {
+          const wishlistGrid = document.querySelector('.wishlist-grid');
+          const emptyWishlist = document.querySelector('.wishlist-empty');
+
+          // Get wishlist items from localStorage
+          const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+          if (wishlistItems.length === 0) {
+            wishlistGrid.classList.add('hidden');
+            emptyWishlist.classList.remove('hidden');
+            return;
+          }
+
+          wishlistGrid.innerHTML = ''; // Clear existing items
+
+          // Filter products that are in wishlist
+          const wishlistProducts = data.filter(product => wishlistItems.includes(product.name));
+
+          wishlistProducts.forEach(product => {
+            const hasDiscount = product.oldPrice ? true : false;
+            const oldPrice = product.oldPrice;
+            const currentPrice = product.price;
+
+            const productHTML = `
+              <div class="wishlist-item" data-product-id="${product.name}">
+                ${hasDiscount ? `<span class="wishlist-badge">-${Math.round((1 - parseInt(currentPrice.replace(/\./g, '')) / parseInt(oldPrice.replace(/\./g, ''))) * 100)}%</span>` : ''}
+                <div class="wishlist-img-container">
+                  <img src="${product.image}" alt="${product.name}" class="wishlist-img">
+                </div>
+                <div class="wishlist-body">
+                  <h3 class="wishlist-title">${product.name}</h3>
+                  <div class="wishlist-price">
+                    <span class="current-price">${currentPrice}₫</span>
+                    ${hasDiscount ? `<span class="old-price">${oldPrice}₫</span>` : ''}
+                  </div>
+                  <div class="wishlist-actions">
+                    <button class="add-to-cart" data-product-id="${product.name}">
+                      <i class="fas fa-shopping-cart"></i>
+                      Thêm vào giỏ
+                    </button>
+                    <button class="remove-btn" data-product-id="${product.name}">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+            wishlistGrid.innerHTML += productHTML;
+          });
+
+          // Reattach event listeners after loading products
+          attachEventListeners();
+        })
+        .catch(error => console.error('Error loading products:', error));
+
+      function attachEventListeners() {
+        // Back to Top Button
+        const backToTop = document.querySelector('.back-to-top');
+
+        function checkScroll() {
+          if (window.pageYOffset > 300) {
+            backToTop.classList.add('show');
+          } else {
+            backToTop.classList.remove('show');
+          }
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+
+        backToTop.addEventListener('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+
+        // Remove from Wishlist
+        const removeButtons = document.querySelectorAll('.remove-btn');
+        removeButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const productId = this.dataset.productId;
+            const wishlistItem = this.closest('.wishlist-item');
+
+            // Remove from localStorage
+            let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+            wishlistItems = wishlistItems.filter(id => id !== productId);
+            localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+
+            // Animate and remove from DOM
+            wishlistItem.style.opacity = '0';
+            setTimeout(() => {
+              wishlistItem.remove();
+
+              // Check if wishlist is empty
+              const wishlistGrid = document.querySelector('.wishlist-grid');
+              if (wishlistGrid.children.length === 0) {
+                wishlistGrid.classList.add('hidden');
+                document.querySelector('.wishlist-empty').classList.remove('hidden');
+              }
+            }, 300);
+          });
+        });
+
+        // Add to Cart
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+          button.addEventListener('click', function () {
+            const productId = this.dataset.productId;
+            // Find the product in wishlistProducts
+            const product = wishlistProducts.find(p => p.name === productId);
+
+            if (product) {
+              // Add product to cart
+              addToCart(product);
+
+              // Show success notification
+              showNotification(`${product.name} đã được thêm vào giỏ hàng`, 'success');
+            }
+          });
+        });
+      }
+
+      // Function to add product to cart
+      function addToCart(product) {
+        // Get existing cart from localStorage
+        const cart = JSON.parse(localStorage.getItem('shopping-cart') || '[]');
+
+        // Check if product already exists in cart
+        const existingItemIndex = cart.findIndex(item => item.name === product.name);
+
+        if (existingItemIndex !== -1) {
+          // Update quantity if product already exists
+          cart[existingItemIndex].quantity += 1;
+        } else {
+          // Add new product to cart
+          cart.push({
+            id: product.id || product.name,
+            name: product.name,
+            price: typeof product.price === 'string' ? parseInt(product.price.replace(/\D/g, '')) : product.price,
+            image: product.image,
+            quantity: 1
+          });
+        }
+
+        // Save updated cart to localStorage
+        localStorage.setItem('shopping-cart', JSON.stringify(cart));
+
+        // Update cart count in header
+        updateCartCount();
+      }
+
+      // Function to update cart count
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('shopping-cart') || '[]');
+        const totalItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+
+        // Try to use the header's updateCartCount if available
+        if (window.bemoriHeader && typeof window.bemoriHeader.updateCartCount === 'function') {
+          window.bemoriHeader.updateCartCount();
+        } else {
+          // Fallback implementation
+          const cartCountElement = document.getElementById('cartCount');
+          if (cartCountElement) {
+            cartCountElement.textContent = totalItems;
+            cartCountElement.classList.toggle('hidden', totalItems === 0);
+          }
+        }
+      }
+
+      // Function to show notification
+      function showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 p-4 rounded-lg z-50 ${type === 'success' ? 'bg-green-500' : 'bg-red-500'
+          } text-white shadow-lg flex items-center`;
+
+        notification.innerHTML = `
+          <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+          <span>${message}</span>
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.opacity = '0';
+          notification.style.transition = 'opacity 0.5s ease';
+
+          setTimeout(() => {
+            notification.remove();
+          }, 500);
+        }, 3000);
+      }
+    });
+  </script>
+  <script type="module">
+    import { loadPartials } from '../assets/js/main.js';
+    loadPartials();
+  </script>
+</body>
+
+</html>

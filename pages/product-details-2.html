@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chi tiết sản phẩm gấu bông cao cấp tại BEMORI - Thế giới gấu bông chính hãng" />
+  <title>Chi tiết sản phẩm - BEMORI</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="stylesheet" href="../assets/css/product-details.css">
+
+  <!-- Auth Links Styling -->
+  <style>
+    /* Đảm bảo màu sắc auth-links đồng nhất */
+    .auth-links a,
+    .auth-links-mobile a,
+    .auth-links span,
+    .auth-links-mobile span {
+      color: #db2777 !important;
+      /* text-pink-600 */
+      font-weight: 600 !important;
+    }
+  </style>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+    }
+
+    /* Apply smooth scrolling for better UX */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Main content container padding */
+    .container.mx-auto {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    /* Size options styling */
+    .size-option {
+      border: 2px solid #e5e7eb;
+      border-radius: 0.5rem;
+      padding: 0.625rem 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+      position: relative;
+      overflow: hidden;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .size-option:hover {
+      border-color: #ec4899;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px rgba(236, 72, 153, 0.1);
+    }
+
+    .size-option.selected {
+      border-color: #ec4899;
+      background-color: #fdf2f8;
+      color: #ec4899;
+      font-weight: 600;
+    }
+
+    /* Loading State */
+    .loading-spinner {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .loading-spinner.active {
+      display: block;
+    }
+
+    /* Error State */
+    .error-message {
+      text-align: center;
+      padding: 2rem;
+      color: #ff4444;
+    }
+
+    .error-details {
+      color: #666;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+    }
+
+    .retry-btn {
+      background: #ff4444;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .retry-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    /* Product Gallery */
+    .product-gallery {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      background-color: white;
+    }
+
+    .product-gallery img {
+      transition: transform 0.5s ease;
+    }
+
+    .product-gallery:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Main product image */
+    #main-image {
+      width: 100%;
+      object-fit: contain;
+      background-color: #fff;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    /* Thumbnail Gallery */
+    .thumbnail-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.75rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .thumbnail {
+      cursor: pointer;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      height: 70px;
+      background-color: white;
+    }
+
+    .thumbnail:hover {
+      border-color: #ec4899;
+      transform: translateY(-2px);
+    }
+
+    .thumbnail.active {
+      border-color: #ec4899;
+    }
+
+    .thumbnail::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.1);
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .thumbnail.active::after,
+    .thumbnail:hover::after {
+      opacity: 0;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+    }
+
+    /* Quantity Input */
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 0.25rem;
+      max-width: 150px;
+      transition: all 0.3s ease;
+    }
+
+    .quantity-controls:focus-within {
+      border-color: #ec4899;
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
+    }
+
+    .quantity-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9fafb;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quantity-btn:hover {
+      background: #f3f4f6;
+      color: #ec4899;
+    }
+
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      background: transparent;
+    }
+
+    .quantity-input:focus {
+      outline: none;
+    }
+
+    /* Wishlist button */
+    .wishlist-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      border: none;
+      color: #6b7280;
+    }
+
+    .wishlist-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .wishlist-btn.active {
+      background: #fecdd3;
+      color: #e11d48;
+    }
+
+    .wishlist-btn.active i {
+      font-weight: 900;
+    }
+
+    /* Add to Cart Button */
+    .add-to-cart-btn {
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: white;
+      padding: 0.875rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      border: none;
+    }
+
+    .add-to-cart-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #db2777 0%, #be185d 100%);
+      transition: width 0.5s ease;
+      z-index: -1;
+    }
+
+    .add-to-cart-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(236, 72, 153, 0.3);
+    }
+
+    .add-to-cart-btn:hover::before {
+      width: 100%;
+    }
+
+    .add-to-cart-btn:active {
+      transform: translateY(-1px);
+    }
+
+    /* Buy Now Button */
+    .buy-now-btn {
+      background: #4f46e5;
+      color: white;
+      padding: 0.875rem 1.5rem;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .buy-now-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: #4338ca;
+      transition: width 0.5s ease;
+      z-index: -1;
+    }
+
+    .buy-now-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+    }
+
+    .buy-now-btn:hover::before {
+      width: 100%;
+    }
+
+    /* Product Features */
+    .product-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .feature-item {
+      background: #f9fafb;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid #f3f4f6;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border-color: #fce7f3;
+    }
+
+    .feature-icon {
+      color: #ec4899;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Enhanced Product Description */
+    .enhanced-description h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #fce7f3;
+      padding-bottom: 0.5rem;
+    }
+
+    .enhanced-description h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #374151;
+      margin: 1.5rem 0 0.75rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .enhanced-description h4:before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 20px;
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      margin-right: 0.5rem;
+      border-radius: 4px;
+    }
+
+    .enhanced-description p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+      color: #4b5563;
+    }
+
+    .enhanced-description ul,
+    .enhanced-description ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .enhanced-description li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 0.5rem;
+    }
+
+    .enhanced-description ul li:before {
+      content: "•";
+      color: #ec4899;
+      font-weight: bold;
+      display: inline-block;
+      width: 1rem;
+      margin-left: -1rem;
+    }
+
+    .enhanced-description ol {
+      counter-reset: item;
+      list-style-type: none;
+    }
+
+    .enhanced-description ol li {
+      counter-increment: item;
+      padding-left: 0.75rem;
+    }
+
+    .enhanced-description ol li:before {
+      content: counter(item);
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: white;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      margin-left: -2rem;
+      font-size: 0.75rem;
+    }
+
+    .enhanced-description .highlight-box {
+      background: #fdf2f8;
+      border-left: 4px solid #ec4899;
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0.5rem;
+    }
+
+    .enhanced-description .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .enhanced-description .feature-card {
+      background: white;
+      border: 1px solid #f3f4f6;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .enhanced-description .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      border-color: #fce7f3;
+    }
+
+    .enhanced-description .feature-card i {
+      color: #ec4899;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Related Products */
+    .related-products {
+      margin-top: 5rem;
+    }
+
+    .related-products .swiper-slide {
+      height: auto;
+      transition: all 0.3s ease;
+    }
+
+    .related-products .swiper-slide:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      color: #6b7280;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: #ec4899;
+      transition: color 0.3s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: #be185d;
+    }
+
+    /* Share Buttons */
+    .share-buttons {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .share-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .share-btn:hover {
+      transform: translateY(-3px) rotate(10deg);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .share-btn.facebook {
+      background: #1877f2;
+    }
+
+    .share-btn.twitter {
+      background: #1da1f2;
+    }
+
+    .share-btn.pinterest {
+      background: #e60023;
+    }
+
+    /* Product Info Tabs */
+    .product-tabs {
+      margin-top: 4rem;
+    }
+
+    .tab-buttons {
+      gap: 0.5rem;
+    }
+
+    .tab-button {
+      padding: 0.75rem 1.25rem;
+      font-weight: 500;
+      color: #6b7280;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .tab-button:hover {
+      color: #ec4899;
+    }
+
+    .tab-button.active {
+      color: #ec4899;
+      border-bottom-color: #ec4899;
+    }
+
+    /* Hide scrollbar for tab buttons on webkit */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for tab buttons on Firefox */
+    .no-scrollbar {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    /* Tab content */
+    .tab-content {
+      display: none;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Price Section Enhancements */
+    .price-section {
+      background: #fdf2f8;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .discount-badge {
+      background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      display: inline-block;
+      font-size: 0.875rem;
+      box-shadow: 0 4px 10px rgba(236, 72, 153, 0.2);
+    }
+
+    /* Reviews */
+    .review-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #f3f4f6;
+      transition: all 0.3s ease;
+    }
+
+    .review-card:hover {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border-color: #fce7f3;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .reviewer-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #ec4899;
+      background: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      font-size: 1.25rem;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: #ec4899;
+    }
+
+    /* Product Card */
+    .product-card {
+      background: white;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 200px;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 1.25rem;
+    }
+
+    .product-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .product-price {
+      color: #ec4899;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #ec4899;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    /* Responsive Improvements */
+    @media (max-width: 768px) {
+      .thumbnail-gallery {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .product-features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      /* Make product gallery not sticky on mobile */
+      .product-gallery {
+        position: relative;
+        top: 0;
+      }
+
+      /* Adjust main image height on mobile */
+      #main-image {
+        max-height: 350px;
+      }
+
+      /* Make buttons full width on mobile */
+      .add-to-cart-btn,
+      .buy-now-btn {
+        width: 100%;
+      }
+
+      /* Adjust font sizes for mobile */
+      h1#product-name {
+        font-size: 1.75rem;
+      }
+
+      .current-price {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .thumbnail-gallery {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      h1#product-name {
+        font-size: 1.5rem;
+      }
+
+      .tab-buttons {
+        gap: 0;
+      }
+
+      .tab-button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      /* Even smaller main image on small screens */
+      #main-image {
+        max-height: 300px;
+      }
+
+      /* Adjust spacing for mobile */
+      .py-12 {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .gap-12 {
+        gap: 1.5rem;
+      }
+    }
+
+    /* Product Media Gallery Zoom Effect */
+    .zoom-gallery-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .zoom-gallery-container.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .zoom-gallery-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+      z-index: 1001;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .zoom-gallery-close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .zoom-gallery-image {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .zoom-gallery-container.active .zoom-gallery-image {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Animation for fadeIn */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    /* Stock indicator */
+    .stock-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+
+    .in-stock {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .low-stock {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .out-of-stock {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <div class="main-wrapper">
+    <!-- Header -->
+    <div id="siteHeader"></div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-12 px-4 max-w-7xl">
+      <!-- Loading State -->
+      <div id="loading-spinner" class="loading-spinner">
+        <div class="animate-spin rounded-full h-14 w-14 border-b-2 border-pink-500 mx-auto"></div>
+        <p class="mt-4 text-gray-600">Đang tải thông tin sản phẩm...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="error-message hidden">
+        <i class="fas fa-exclamation-circle text-5xl mb-4"></i>
+        <h2 class="text-2xl font-semibold mb-2">Không thể tải thông tin sản phẩm</h2>
+        <p class="error-details"></p>
+        <button id="retry-button" class="retry-btn mt-4">
+          <i class="fas fa-redo mr-2"></i>Thử lại
+        </button>
+      </div>
+
+      <!-- Product Details -->
+      <div id="product-details" class="hidden">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+          <a href="index.html" class="hover:text-pink-600 transition">Trang chủ</a>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <a href="shop.html" class="hover:text-pink-600 transition">Cửa hàng</a>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <span id="product-category" class="text-gray-600">Danh mục</span>
+          <i class="fas fa-chevron-right text-xs"></i>
+          <span id="product-name-breadcrumb" class="text-gray-600">Tên sản phẩm</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start" data-aos="fade-up">
+          <!-- Product Gallery -->
+          <div class="product-gallery md:sticky top-24 mb-8">
+            <button class="wishlist-btn" id="wishlist-btn" aria-label="Thêm vào yêu thích">
+              <i class="far fa-heart"></i>
+            </button>
+            <div class="flex-1 overflow-hidden rounded-lg">
+              <img id="main-image" src="" alt=""
+                class="w-full rounded-lg cursor-zoom-in object-contain bg-white h-auto max-h-[450px]" id="zoom-trigger">
+            </div>
+            <div class="thumbnail-gallery mt-3" id="thumbnail-gallery">
+              <!-- Thumbnails will be added here -->
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="space-y-6 self-start" data-aos="fade-up" data-aos-delay="200">
+            <div>
+              <div class="flex items-center space-x-2 mb-2">
+                <span id="brand-badge"
+                  class="bg-gray-100 text-gray-800 px-2 py-1 rounded-full text-xs font-medium">Thương hiệu</span>
+                <div id="availability-badge" class="stock-indicator in-stock">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Còn hàng</span>
+                </div>
+              </div>
+              <h1 id="product-name" class="text-3xl font-bold text-gray-900"></h1>
+            </div>
+
+            <!-- Rating -->
+            <div class="flex items-center space-x-2">
+              <div id="rating-stars" class="text-yellow-400"></div>
+              <span id="review-count" class="text-gray-500"></span>
+            </div>
+
+            <!-- Price -->
+            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+              <div class="flex items-end gap-2">
+                <span id="product-price" class="text-3xl font-bold text-pink-600"></span>
+                <span id="original-price" class="text-lg text-gray-400 line-through"></span>
+                <span id="discount-badge" class="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full"></span>
+              </div>
+            </div>
+
+            <!-- Size Selection -->
+            <div class="mb-6">
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-medium">Kích thước</h3>
+                <a href="#" class="text-sm text-pink-600 hover:underline">Hướng dẫn chọn size</a>
+              </div>
+              <div id="size-options" class="flex flex-wrap gap-2">
+                <!-- Size options will be added here -->
+              </div>
+            </div>
+
+            <!-- Quantity and Add to Cart -->
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+              <div class="flex-shrink-0">
+                <h3 class="font-medium mb-2">Số lượng</h3>
+                <div class="inline-flex items-center border border-gray-300 rounded-lg bg-white">
+                  <button id="decrease-quantity"
+                    class="quantity-btn w-10 h-10 flex items-center justify-center text-gray-600 hover:text-pink-600">
+                    <i class="fas fa-minus text-sm"></i>
+                  </button>
+                  <input type="number" id="quantity" class="w-12 h-10 text-center border-0 focus:outline-none" value="1"
+                    min="1" max="10">
+                  <button id="increase-quantity"
+                    class="quantity-btn w-10 h-10 flex items-center justify-center text-gray-600 hover:text-pink-600">
+                    <i class="fas fa-plus text-sm"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex-1 flex flex-col md:flex-row gap-3">
+                <button id="add-to-cart" class="add-to-cart-btn flex-1">
+                  <i class="fas fa-cart-plus mr-2"></i>
+                  Thêm vào giỏ
+                </button>
+                <button class="buy-now-btn flex-1">
+                  <i class="fas fa-bolt mr-2"></i>
+                  Mua ngay
+                </button>
+              </div>
+            </div>
+
+            <!-- Delivery Information -->
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+              <div class="flex items-start space-x-3">
+                <i class="fas fa-truck text-pink-600 mt-1"></i>
+                <div>
+                  <h3 class="font-medium text-gray-900">Thông tin giao hàng</h3>
+                  <p class="text-sm text-gray-600 mt-1">Giao hàng miễn phí cho đơn hàng từ 500.000₫</p>
+                  <p class="text-sm text-gray-600">Thời gian giao hàng dự kiến: 2-4 ngày</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Share Buttons -->
+            <div>
+              <p class="text-sm text-gray-600 mb-2">Chia sẻ sản phẩm:</p>
+              <div class="share-buttons">
+                <button class="share-btn facebook" aria-label="Chia sẻ lên Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button class="share-btn twitter" aria-label="Chia sẻ lên Twitter">
+                  <i class="fab fa-twitter"></i>
+                </button>
+                <button class="share-btn pinterest" aria-label="Chia sẻ lên Pinterest">
+                  <i class="fab fa-pinterest-p"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Features and Description (Reorganized) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8" data-aos="fade-up">
+          <!-- Description (Moved from above) -->
+          <div class="bg-white p-5 rounded-lg border border-gray-100 shadow-sm md:col-span-2">
+            <h3 class="font-medium text-gray-900 mb-3">Mô tả sản phẩm</h3>
+            <div class="flex items-start space-x-3">
+              <i class="fas fa-quote-left text-pink-400 text-xl mt-1"></i>
+              <div>
+                <p id="product-description" class="text-gray-600 italic leading-relaxed"></p>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-pink-100 text-pink-800">
+                    <i class="fas fa-check-circle mr-1"></i> Chất lượng cao
+                  </span>
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                    <i class="fas fa-shield-alt mr-1"></i> An toàn
+                  </span>
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    <i class="fas fa-leaf mr-1"></i> Thân thiện
+                  </span>
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                    <i class="fas fa-heart mr-1"></i> Dễ thương
+                  </span>
+                </div>
+
+                <!-- Phần mới thêm vào không gian trống -->
+                <div class="mt-5 bg-gradient-to-r from-pink-50 to-purple-50 p-4 rounded-lg border border-pink-100">
+                  <h4 class="font-medium text-gray-800 mb-2 flex items-center">
+                    <i class="fas fa-gift text-pink-500 mr-2"></i>
+                    <span>Lý do nên chọn Gấu bông Teddy Brown</span>
+                  </h4>
+                  <div class="grid grid-cols-2 gap-3 mt-3">
+                    <div class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-8 w-8 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 mr-2">
+                        <i class="fas fa-star"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-700">Là món quà tặng hoàn hảo cho người yêu, bạn bè và người thân
+                        </p>
+                      </div>
+                    </div>
+                    <div class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 mr-2">
+                        <i class="fas fa-moon"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-700">Người bạn ôm ấp lý tưởng khi ngủ, xua tan cô đơn</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 mr-2">
+                        <i class="fas fa-ribbon"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-700">Vật trang trí đáng yêu cho phòng ngủ hoặc không gian sống</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start">
+                      <div
+                        class="flex-shrink-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-2">
+                        <i class="fas fa-smile"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm text-gray-700">Gây ấn tượng với hình dáng dễ thương, ai cũng muốn ôm ngay</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3 text-center">
+                    <p class="text-sm font-medium text-gray-500"><i class="fas fa-heart text-pink-500"></i> Đã có hơn
+                      5,000+ khách hàng hài lòng với gấu bông của chúng tôi <i class="fas fa-heart text-pink-500"></i>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Features -->
+          <div class="grid grid-cols-1 gap-4">
+            <h3 class="font-medium text-gray-900 mb-2">Dịch vụ & Tiện ích</h3>
+            <div class="feature-item">
+              <i class="fas fa-truck feature-icon"></i>
+              <h3 class="font-medium text-gray-900">Miễn phí vận chuyển</h3>
+              <p class="text-sm text-gray-500">Cho đơn hàng từ 500k</p>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-undo feature-icon"></i>
+              <h3 class="font-medium text-gray-900">Đổi trả dễ dàng</h3>
+              <p class="text-sm text-gray-500">Trong vòng 30 ngày</p>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-shield-alt feature-icon"></i>
+              <h3 class="font-medium text-gray-900">Bảo hành chính hãng</h3>
+              <p class="text-sm text-gray-500">12 tháng</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Tabs -->
+        <div class="mt-12" data-aos="fade-up">
+          <div class="tab-buttons flex mb-4 border-b border-gray-200 overflow-x-auto no-scrollbar">
+            <button class="tab-button active whitespace-nowrap" data-tab="description">Mô tả chi tiết</button>
+            <button class="tab-button whitespace-nowrap" data-tab="specifications">Thông số kỹ thuật</button>
+            <button class="tab-button whitespace-nowrap" data-tab="reviews">Đánh giá sản phẩm</button>
+            <button class="tab-button whitespace-nowrap" data-tab="delivery">Vận chuyển & Đổi trả</button>
+          </div>
+          <div class="tab-content bg-white p-6 rounded-lg shadow-sm active" id="description-tab">
+            <div id="product-full-description" class="prose max-w-none">
+              <!-- Full description will be added here -->
+            </div>
+          </div>
+          <div class="tab-content bg-white p-6 rounded-lg shadow-sm" id="specifications-tab">
+            <div id="product-specifications" class="prose max-w-none">
+              <!-- Specifications will be added here -->
+            </div>
+          </div>
+          <div class="tab-content bg-white p-6 rounded-lg shadow-sm" id="reviews-tab">
+            <div id="product-reviews" class="prose max-w-none">
+              <div class="mb-6">
+                <h3 class="text-2xl font-bold mb-4">Đánh giá từ khách hàng</h3>
+                <div class="flex flex-col md:flex-row gap-6">
+                  <div
+                    class="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center justify-center text-center md:w-1/3">
+                    <div class="text-5xl font-bold text-pink-600 mb-2">4.8</div>
+                    <div class="text-yellow-400 text-2xl mb-2">★★★★★</div>
+                    <div class="text-gray-500">Dựa trên 128 đánh giá</div>
+                    <button class="mt-4 bg-pink-600 text-white px-4 py-2 rounded-lg hover:bg-pink-700 transition">Viết
+                      đánh giá</button>
+                  </div>
+                  <div class="md:w-2/3">
+                    <div class="space-y-2">
+                      <div class="flex items-center">
+                        <span class="w-12 text-right mr-4">5 ★</span>
+                        <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div class="bg-yellow-400 h-full" style="width: 85%"></div>
+                        </div>
+                        <span class="w-12 text-left ml-4">85%</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-12 text-right mr-4">4 ★</span>
+                        <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div class="bg-yellow-400 h-full" style="width: 10%"></div>
+                        </div>
+                        <span class="w-12 text-left ml-4">10%</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-12 text-right mr-4">3 ★</span>
+                        <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div class="bg-yellow-400 h-full" style="width: 3%"></div>
+                        </div>
+                        <span class="w-12 text-left ml-4">3%</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-12 text-right mr-4">2 ★</span>
+                        <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div class="bg-yellow-400 h-full" style="width: 1%"></div>
+                        </div>
+                        <span class="w-12 text-left ml-4">1%</span>
+                      </div>
+                      <div class="flex items-center">
+                        <span class="w-12 text-right mr-4">1 ★</span>
+                        <div class="flex-1 h-4 bg-gray-200 rounded-full overflow-hidden">
+                          <div class="bg-yellow-400 h-full" style="width: 1%"></div>
+                        </div>
+                        <span class="w-12 text-left ml-4">1%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-6 mt-8">
+                <!-- Review Cards -->
+                <div class="review-card">
+                  <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Reviewer" class="reviewer-avatar">
+                    <div>
+                      <h4 class="font-medium">Nguyễn Thị Anh</h4>
+                      <div class="text-yellow-400">★★★★★</div>
+                      <div class="text-gray-500 text-sm">12/06/2023</div>
+                    </div>
+                  </div>
+                  <p class="text-gray-600">Gấu bông rất đáng yêu, đúng như mô tả trên web. Chất liệu mềm mại, phù hợp để
+                    ôm khi ngủ. Mình rất hài lòng với sản phẩm này!</p>
+                  <div class="mt-4 flex gap-2">
+                    <img src="assets/images/review1.jpg" alt="Review image" class="w-20 h-20 rounded-md object-cover">
+                    <img src="assets/images/review2.jpg" alt="Review image" class="w-20 h-20 rounded-md object-cover">
+                  </div>
+                </div>
+
+                <div class="review-card">
+                  <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Reviewer" class="reviewer-avatar">
+                    <div>
+                      <h4 class="font-medium">Trần Văn Minh</h4>
+                      <div class="text-yellow-400">★★★★<span class="text-gray-300">★</span></div>
+                      <div class="text-gray-500 text-sm">05/06/2023</div>
+                    </div>
+                  </div>
+                  <p class="text-gray-600">Mua tặng bạn gái, bạn ấy rất thích. Đóng gói cẩn thận, giao hàng nhanh. Trừ 1
+                    sao vì màu sắc hơi khác so với hình ảnh trên web.</p>
+                </div>
+
+                <button
+                  class="mx-auto block px-6 py-3 border border-pink-600 text-pink-600 rounded-lg hover:bg-pink-50 transition">Xem
+                  thêm đánh giá</button>
+              </div>
+            </div>
+          </div>
+          <div class="tab-content bg-white p-6 rounded-lg shadow-sm" id="delivery-tab">
+            <div class="prose max-w-none">
+              <h3 class="text-xl font-bold mb-4">Thông tin vận chuyển</h3>
+              <ul class="space-y-2">
+                <li>Miễn phí giao hàng cho đơn hàng từ 500.000₫</li>
+                <li>Phí vận chuyển: 30.000₫ - 50.000₫ tùy khu vực</li>
+                <li>Thời gian giao hàng: 2-4 ngày (không tính cuối tuần và ngày lễ)</li>
+                <li>Khu vực giao hàng: Toàn quốc</li>
+              </ul>
+
+              <h3 class="text-xl font-bold mb-4 mt-8">Chính sách đổi trả</h3>
+              <ul class="space-y-2">
+                <li>Đổi trả miễn phí trong vòng 30 ngày</li>
+                <li>Sản phẩm phải còn nguyên tem, nhãn và chưa qua sử dụng</li>
+                <li>Hoàn tiền trong vòng 7 ngày làm việc sau khi nhận được sản phẩm trả lại</li>
+                <li>Không áp dụng đổi trả cho sản phẩm mua trong chương trình khuyến mãi đặc biệt</li>
+              </ul>
+
+              <p class="mt-6 text-sm text-gray-500">Lưu ý: Vui lòng kiểm tra kỹ sản phẩm khi nhận hàng. Nếu có bất kỳ
+                vấn đề gì, hãy liên hệ với chúng tôi trong vòng 24 giờ.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recently Viewed Products -->
+        <div class="mt-16" data-aos="fade-up">
+          <h2 class="text-2xl font-bold mb-6">Sản phẩm đã xem gần đây</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <!-- Recently viewed products will be added here -->
+            <div class="product-card animate-fadeInUp" style="animation-delay: 0.1s">
+              <div class="product-image-container">
+                <span class="product-badge">Mới</span>
+                <img src="../assets/img/products/gaubong (1).jpg" alt="Sản phẩm 1" class="product-image">
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Gấu Teddy Brown Mini</h3>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="product-price">350.000₫</span>
+                  <button
+                    class="w-10 h-10 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center hover:bg-pink-100 transition">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card animate-fadeInUp" style="animation-delay: 0.2s">
+              <div class="product-image-container">
+                <img src="../assets/img/products/gaubong (2).jpg" alt="Sản phẩm 2" class="product-image">
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Gấu Bông Doraemon</h3>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="product-price">280.000₫</span>
+                  <button
+                    class="w-10 h-10 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center hover:bg-pink-100 transition">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card animate-fadeInUp" style="animation-delay: 0.3s">
+              <div class="product-image-container">
+                <span class="product-badge">Sale</span>
+                <img src="../assets/img/products/gaubong (3).jpg" alt="Sản phẩm 3" class="product-image">
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Gấu Bông Stitch</h3>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="product-price">420.000₫</span>
+                  <button
+                    class="w-10 h-10 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center hover:bg-pink-100 transition">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card animate-fadeInUp" style="animation-delay: 0.4s">
+              <div class="product-image-container">
+                <img src="../assets/img/products/gaubong (4).jpg" alt="Sản phẩm 4" class="product-image">
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Gấu Bông Pikachu</h3>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="product-price">320.000₫</span>
+                  <button
+                    class="w-10 h-10 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center hover:bg-pink-100 transition">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-card animate-fadeInUp" style="animation-delay: 0.5s">
+              <div class="product-image-container">
+                <img src="../assets/img/products/gaubong (5).jpg" alt="Sản phẩm 5" class="product-image">
+              </div>
+              <div class="product-info">
+                <h3 class="product-title">Gấu Brown Jumbo</h3>
+                <div class="flex justify-between items-center mt-2">
+                  <span class="product-price">750.000₫</span>
+                  <button
+                    class="w-10 h-10 bg-pink-50 text-pink-600 rounded-full flex items-center justify-center hover:bg-pink-100 transition">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products" data-aos="fade-up">
+          <h2 class="text-2xl font-bold mb-6">Sản phẩm liên quan</h2>
+          <div class="swiper related-products-swiper">
+            <div class="swiper-wrapper" id="related-products">
+              <!-- Related products will be added here -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Zoom Gallery Container -->
+    <div class="zoom-gallery-container" id="zoom-gallery">
+      <div class="zoom-gallery-close" id="zoom-close"><i class="fas fa-times"></i></div>
+      <img src="" alt="" class="zoom-gallery-image" id="zoom-image">
+    </div>
+
+    <!-- Footer -->
+    <div id="siteFooter"></div>
+  </div>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="../assets/js/product-details-2.js"></script>
+  <script type="module">
+    import { loadPartials } from '../assets/js/main.js';
+    loadPartials();
+
+    // Kiểm tra và xử lý đăng nhập
+    function checkLoginStatus() {
+      // Lấy thông tin user từ localStorage
+      const userInfo = localStorage.getItem('teddy_user');
+      // Nếu không có thông tin user, nghĩa là chưa đăng nhập
+      return !!userInfo;
+    }
+
+    // Hiển thị thông báo
+    function showNotification(message, type = "success") {
+      const notification = document.createElement("div");
+      notification.className = `fixed top-4 right-4 p-4 rounded-lg ${type === "success" ? "bg-green-500" : "bg-red-500"} text-white z-50`;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+    // Xử lý chức năng mua ngay
+    document.addEventListener('DOMContentLoaded', function () {
+      const buyNowBtn = document.querySelector('.buy-now-btn');
+      if (buyNowBtn) {
+        buyNowBtn.addEventListener('click', function () {
+          if (!checkLoginStatus()) {
+            showNotification("Vui lòng đăng nhập để mua hàng", "error");
+            // Lưu đường dẫn hiện tại vào session để sau khi đăng nhập xong có thể quay lại
+            sessionStorage.setItem('redirect_after_login', window.location.href);
+            // Chuyển hướng đến trang đăng nhập
+            setTimeout(() => {
+              window.location.href = 'login.html';
+            }, 1500);
+            return;
+          }
+
+          // Xử lý mua hàng khi đã đăng nhập
+          const selectedSize = document.querySelector(".size-option.selected").textContent;
+          const quantity = parseInt(document.getElementById("quantity").value);
+          const productName = document.getElementById("product-name").textContent;
+
+          // Lấy thông tin sản phẩm và giá
+          const productPrice = parseFloat(document.getElementById("product-price").textContent.replace(/[^\d]/g, ''));
+          const productImage = document.getElementById("main-image").src;
+          const productId = new URLSearchParams(window.location.search).get('id') || '1';
+
+          // Tạo đối tượng sản phẩm để lưu vào checkout_items
+          const product = {
+            id: productId,
+            name: productName,
+            price: productPrice,
+            image: productImage,
+            size: selectedSize,
+            quantity: quantity
+          };
+
+          // Lưu sản phẩm vào sessionStorage để trang checkout sử dụng
+          sessionStorage.setItem('checkout_items', JSON.stringify([product]));
+          sessionStorage.setItem('checkout_type', 'buy_now');
+
+          // Hiển thị thông báo
+          showNotification(`Đang tiến hành thanh toán cho ${quantity} sản phẩm ${productName} (Size: ${selectedSize})`, "success");
+
+          // Chuyển hướng đến trang thanh toán
+          setTimeout(() => {
+            window.location.href = 'checkout.html';
+          }, 1500);
+        });
+      }
+    });
+  </script>
+
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // Tab functionality
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons and contents
+        document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        // Add active class to clicked button and corresponding content
+        button.classList.add('active');
+        document.getElementById(`${button.dataset.tab}-tab`).classList.add('active');
+      });
+    });
+
+    // Initialize related products swiper
+    const relatedProductsSwiper = new Swiper('.related-products-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 3,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+      },
+    });
+
+    // Wishlist button functionality
+    document.getElementById('wishlist-btn').addEventListener('click', function () {
+      this.classList.toggle('active');
+    });
+
+    // Quantity controls
+    document.getElementById('decrease-quantity').addEventListener('click', function () {
+      const quantityInput = document.getElementById('quantity');
+      let value = parseInt(quantityInput.value);
+      if (value > 1) {
+        quantityInput.value = value - 1;
+      }
+    });
+
+    document.getElementById('increase-quantity').addEventListener('click', function () {
+      const quantityInput = document.getElementById('quantity');
+      let value = parseInt(quantityInput.value);
+      if (value < 10) {
+        quantityInput.value = value + 1;
+      }
+    });
+
+    // Zoom gallery functionality
+    document.getElementById('main-image').addEventListener('click', function () {
+      const zoomGallery = document.getElementById('zoom-gallery');
+      const zoomImage = document.getElementById('zoom-image');
+
+      zoomImage.src = this.src;
+      zoomGallery.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('zoom-close').addEventListener('click', function () {
+      const zoomGallery = document.getElementById('zoom-gallery');
+
+      zoomGallery.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    // Also close when clicking outside the image
+    document.getElementById('zoom-gallery').addEventListener('click', function (e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Prevent scrolling when zoom gallery is open
+    document.addEventListener('keydown', function (e) {
+      if (document.getElementById('zoom-gallery').classList.contains('active') && e.key === 'Escape') {
+        document.getElementById('zoom-gallery').classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+
+</html>

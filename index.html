@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="BEMORI - Cửa hàng gấu bông cao cấp với nhiều mẫu mã đa dạng, chất lượng tốt và giá cả phải chăng" />
+  <meta name="keywords" content="gấu bông, teddy bear, thú nhồi bông, quà tặng, đồ chơi" />
+  <meta name="author" content="BEMORI" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="BEMORI - Cửa hàng gấu bông cao cấp" />
+  <meta property="og:description" content="Khám phá bộ sưu tập gấu bông cao cấp tại BEMORI" />
+  <meta property="og:image" content="assets/img/logo.png" />
+  <meta property="og:url" content="https://bemori.com" />
+  <title>BEMORI - Cửa hàng gấu bông cao cấp</title>
+
+  <!-- Preload critical assets -->
+  <link rel="preload" href="https://cdn.tailwindcss.com" as="script" />
+  <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" as="style" />
+  <link rel="preload" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" as="style" />
+  <link rel="preload" href="assets/css/main.css" as="style" />
+  <link rel="preload" href="assets/css/responsive.css" as="style" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/sidebars.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+  <!-- Hamburger Menu CSS -->
+  <style>
+    :root {
+      --color-primary: #4a90e2;
+      --color-secondary: #f5f5f5;
+      --color-text: #333;
+      --color-background: #fff;
+      --color-menu-bg: #2c3e50;
+      --transition-speed: 0.3s;
+    }
+
+    [data-theme="dark"] {
+      --color-primary: #64b5f6;
+      --color-secondary: #2c2c2c;
+      --color-text: #f5f5f5;
+      --color-background: #1a1a1a;
+      --color-menu-bg: #1a1a1a;
+    }
+
+    body {
+      background-color: var(--color-background);
+      color: var(--color-text);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--color-primary);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .theme-toggle i {
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .loading-spinner.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--color-secondary);
+      border-top: 5px solid var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Improved Product Card */
+    .product-card {
+      background: var(--color-background);
+      border: 1px solid var(--color-secondary);
+      transition: all var(--transition-speed) ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card img {
+      transition: transform var(--transition-speed) ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Improved Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all var(--transition-speed) ease;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-secondary {
+      background: var(--color-secondary);
+      color: var(--color-text);
+    }
+
+    /* Form Improvements */
+    input,
+    textarea,
+    select {
+      background: var(--color-background);
+      color: var(--color-text);
+      border: 1px solid var(--color-secondary);
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      transition: all var(--transition-speed) ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger-menu {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .hamburger-menu {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      .hamburger-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+      }
+
+      .hamburger-icon span {
+        display: block;
+        height: 3px;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+
+      /* FIXED: Hamburger icon state when menu is active */
+      .hamburger-icon.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger-icon.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger-icon.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background-color: var(--color-menu-bg);
+        z-index: 999;
+        padding: 60px 20px 20px;
+        transition: right 0.3s ease;
+        overflow-y: auto;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-menu ul {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-menu ul li {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .nav-menu .submenu {
+        position: static;
+        display: none;
+        width: 100%;
+        box-shadow: none;
+        padding-left: 15px;
+      }
+
+      .nav-menu .menu-item.open .submenu {
+        display: block;
+      }
+
+      .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none;
+      }
+
+      .nav-overlay.active {
+        display: block;
+      }
+
+      /* Animation for hamburger to X */
+      .hamburger-icon.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      .hamburger-icon.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger-icon.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+
+      /* Dropdown indicators for mobile */
+      .menu-item-has-children {
+        position: relative;
+      }
+
+      .dropdown-toggle {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+      }
+
+      .dropdown-toggle:after {
+        content: "+";
+        font-size: 20px;
+        color: #fff;
+      }
+
+      .menu-item.open .dropdown-toggle:after {
+        content: "-";
+      }
+    }
+
+    .product-card {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Sale title styling with animation */
+    .sale-title {
+      color: #ff4444;
+      font-weight: 700;
+      font-size: 24px;
+      margin-bottom: 15px;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Collection Slides Styling */
+    .collection-swiper .swiper-slide {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .collection-swiper .swiper-slide:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .collection-swiper .slide-content {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .collection-swiper .slide-content img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .collection-swiper .swiper-slide:hover .slide-content img {
+      transform: scale(1.05);
+    }
+
+    .collection-swiper .slide-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4));
+      color: #ffffff;
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+
+    .collection-swiper .slide-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .collection-swiper .slide-desc {
+      font-size: 0.9rem;
+      color: #ffffff;
+      opacity: 0.95;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    .collection-swiper .swiper-button-next,
+    .collection-swiper .swiper-button-prev {
+      color: #ff4444;
+      background: rgba(255, 255, 255, 0.9);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .collection-swiper .swiper-button-next:after,
+    .collection-swiper .swiper-button-prev:after {
+      font-size: 1.2rem;
+    }
+
+    .collection-swiper .swiper-pagination-bullet {
+      background: #ff4444;
+      opacity: 0.5;
+    }
+
+    .collection-swiper .swiper-pagination-bullet-active {
+      opacity: 1;
+      background: #ff4444;
+    }
+
+    .product-image {
+      position: relative;
+      padding-top: 100%;
+    }
+
+    .product-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .sale-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ff4444;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .product-info {
+      padding: 12px;
+    }
+
+    .product-name {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .original-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 12px;
+    }
+
+    .sale-price,
+    .price {
+      color: #ff4444;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .stars {
+      color: #ffd700;
+    }
+
+    .rating-count {
+      color: #666;
+      font-size: 12px;
+    }
+
+    /* Quick Navigation Sidebar */
+    .quick-nav {
+      position: fixed;
+      top: 50%;
+      right: 25px;
+      transform: translateY(-50%);
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 30px;
+      padding: 15px 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .quick-nav.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .quick-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 20px 0;
+      color: #ff4444;
+      font-size: 11px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .quick-nav-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .quick-nav-item:hover i {
+      background-color: #ff4444;
+      color: white;
+    }
+
+    .quick-nav-item i {
+      font-size: 18px;
+      margin-bottom: 6px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff1f1;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(255, 68, 68, 0.1);
+    }
+
+    .quick-nav-item span {
+      font-weight: 500;
+    }
+
+    /* Promotional banners */
+    .promo-banners {
+      position: fixed;
+      left: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+
+    .promo-banners.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .promo-banner {
+      padding: 15px;
+      border-radius: 12px;
+      width: 140px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-banner:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .promo-banner::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .promo-banner.pink {
+      background: linear-gradient(45deg, #ff9a9e, #fecfef);
+    }
+
+    .promo-banner.blue {
+      background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
+    }
+
+    .promo-banner.purple {
+      background: linear-gradient(45deg, #d299c2, #fef9d7);
+    }
+
+    .promo-banner.green {
+      background: linear-gradient(45deg, #96e6a1, #d4fc79);
+    }
+
+    .promo-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: white;
+      margin-bottom: 5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .promo-text {
+      font-size: 13px;
+      color: white;
+      font-weight: 500;
+    }
+
+    /* Floating Image Banner */
+    .floating-image-banner {
+      position: fixed;
+      left: 25px;
+      top: 70%;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0.6s ease, transform 0.3s ease;
+    }
+
+    .floating-image-banner.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .floating-image-banner:hover {
+      transform: translateY(-5px);
+    }
+
+    .floating-image-banner img {
+      width: 140px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff4444;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 68, 68, 0.3);
+      z-index: 1000;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      background-color: #ff2424;
+      box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+    }
+
+    /* Product Preview */
+    .product-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .product-preview.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .preview-content {
+      background-color: white;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      max-height: 90vh;
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .preview-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .preview-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+      line-height: 1;
+    }
+
+    .preview-body {
+      display: flex;
+      padding: 20px;
+      gap: 30px;
+      overflow-y: auto;
+    }
+
+    @media (max-width: 768px) {
+      .preview-body {
+        flex-direction: column;
+      }
+    }
+
+    .preview-image {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .preview-image img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .preview-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .preview-price {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .preview-sale-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ff4444;
+    }
+
+    .preview-original-price {
+      font-size: 16px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .preview-description {
+      color: #666;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .preview-actions {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .add-to-cart-btn {
+      background-color: #ff4444;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      flex: 2;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: #ff2424;
+    }
+
+    .wishlist-btn {
+      background-color: #fff1f1;
+      color: #ff4444;
+      border: 1px solid #ffcaca;
+      padding: 12px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      flex: 1;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wishlist-btn:hover {
+      background-color: #ffe6e6;
+    }
+
+    /* Animated Features */
+    .features-list {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 15px;
+      margin: 30px auto;
+      padding: 0 20px;
+      max-width: 1200px;
+    }
+
+    .feature-card {
+      background-color: white;
+      padding: 15px 10px;
+      border-radius: 15px;
+      width: calc(25% - 15px);
+      flex-shrink: 0;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 1024px) {
+      .features-list {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .feature-card {
+        width: calc(50% - 15px);
+        margin-bottom: 15px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .feature-card {
+        width: 100%;
+      }
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+      animation: shine 1.5s ease;
+    }
+
+    @keyframes shine {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .feature-icon {
+      font-size: 46px;
+      color: #ff4444;
+      margin-bottom: 15px;
+    }
+
+    .feature-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* Thêm styles cho các phần mới */
+    .product-specs {
+      border-top: 1px solid var(--color-secondary);
+      border-bottom: 1px solid var(--color-secondary);
+      padding: 1rem 0;
+    }
+
+    .specs-list li {
+      padding: 0.25rem 0;
+    }
+
+    .product-description {
+      padding: 1rem 0;
+    }
+
+    .product-reviews {
+      padding: 1rem 0;
+    }
+
+    .rating-stars {
+      font-size: 1.2rem;
+    }
+
+    .progress-bar {
+      background-color: var(--color-secondary);
+    }
+
+    .progress {
+      background-color: #ffd700;
+      transition: width 0.3s ease;
+    }
+
+    /* Dark mode adjustments */
+    [data-theme="dark"] .specs-list li span:first-child {
+      color: #a0aec0;
+    }
+
+    [data-theme="dark"] .product-description {
+      color: #a0aec0;
+    }
+
+    [data-theme="dark"] .review-count {
+      color: #a0aec0;
+    }
+
+    [data-theme="dark"] .progress-bar {
+      background-color: #2d3748;
+    }
+  </style>
+
+  <!-- Auth Links Styling -->
+  <style>
+    /* Đảm bảo màu sắc auth-links đồng nhất */
+    .auth-links a,
+    .auth-links-mobile a,
+    .auth-links span,
+    .auth-links-mobile span {
+      color: #db2777 !important;
+      /* text-pink-600 */
+      font-weight: 600 !important;
+    }
+  </style>
+</head>
+
+
+<body class="bg-gray-50">
+  <div class="main-wrapper">
+    <!-- Header - Will be loaded from external file but should be responsive -->
+    <div id="siteHeader" class="w-full">
+      <!-- Mobile Nav Menu (This is a placeholder - the real menu will be loaded by JS) -->
+
+    </div>
+
+    <!-- Sticky Promotional Banners (Left Side) - Hidden on Small devices -->
+    <div class="promo-banners hidden lg:block">
+      <div class="promo-banner pink">
+        <p class="promo-title">FREESHIP</p>
+        <p class="promo-text">Đơn từ 500K</p>
+      </div>
+      <div class="promo-banner blue">
+        <p class="promo-title">GIẢM 15%</p>
+        <p class="promo-text">Mã: BEMORI15</p>
+      </div>
+      <div class="promo-banner purple">
+        <p class="promo-title">FLASH SALE</p>
+        <p class="promo-text">Giảm đến 50%</p>
+      </div>
+      <div class="promo-banner green">
+        <p class="promo-title">QUÀ TẶNG</p>
+        <p class="promo-text">Đơn từ 800K</p>
+      </div>
+    </div>
+
+    <!-- Swiper Banner - Adjusted for mobile -->
+    <div class="swiper banner-swiper w-full">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="img/banners/banner1.jpg" loading="lazy"
+            class="w-full h-auto md:h-auto object-cover" /></div>
+        <div class="swiper-slide"><img src="img/banners/banner2.jpg" loading="lazy"
+            class="w-full h-auto md:h-auto object-cover" /></div>
+        <div class="swiper-slide"><img src="img/banners/banner3.jpg" loading="lazy"
+            class="w-full h-auto md:h-auto object-cover" /></div>
+      </div>
+      <!-- Dots & arrows -->
+      <div class="swiper-pagination banner-pagination"></div>
+      <div class="swiper-button-next banner-next hidden sm:flex"></div>
+      <div class="swiper-button-prev banner-prev hidden sm:flex"></div>
+    </div>
+
+    <section class="products">
+      <!-- CỤM DỊCH VỤ GẤU BÔNG - Responsive grid with 2 cols on mobile, 3 on larger screens -->
+      <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-4 px-2 sm:px-4 mb-4 sm:mb-8">
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (1).png" loading="lazy" alt="Gấu tặng bạn gái" />
+        </a>
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (2).png" loading="lazy" alt="Gấu tặng bé yêu" />
+        </a>
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (3).png" loading="lazy" alt="Thú bông cute" />
+        </a>
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (4).png" loading="lazy" alt="Thú bông theo màu sắc" />
+        </a>
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (5).png" loading="lazy" alt="Gấu event" />
+        </a>
+        <a href="pages/shop.html" class="service-card block hover:opacity-90 transition-opacity">
+          <img src="img/banners/gaubong (6).png" loading="lazy" alt="Bán buôn bán sỉ" />
+        </a>
+      </div>
+
+      <!-- TIÊU ĐỀ SLIDE BỘ SƯU TẬP -->
+      <h2 class="text-center text-lg sm:text-xl font-bold text-pink-500 mb-2 sm:mb-4">BỘ SƯU TẬP GẤU BÔNG</h2>
+
+      <!-- SLIDER -->
+      <div class="swiper collection-swiper px-2 sm:px-4">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (1).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 1" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Teddy</h3>
+                  <p class="slide-desc text-sm sm:text-base">Gấu bông cao cấp nhập khẩu</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (2).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 2" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Capybara</h3>
+                  <p class="slide-desc text-sm sm:text-base">Gấu bông thú cưng hot trend</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (3).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 3" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Couple</h3>
+                  <p class="slide-desc text-sm sm:text-base">Bộ đôi gấu bông đáng yêu</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (4).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 4" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Khổng Lồ</h3>
+                  <p class="slide-desc text-sm sm:text-base">Gấu bông size lớn ấn tượng</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (5).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 5" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Ghi Âm</h3>
+                  <p class="slide-desc text-sm sm:text-base">Gấu bông thông minh đa năng</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="swiper-slide">
+            <a href="pages/shop.html" class="block">
+              <div class="slide-content">
+                <img src="img/banners/BST (6).jpg" loading="lazy" alt="Bộ sưu tập gấu bông 6" class="w-full" />
+                <div class="slide-info">
+                  <h3 class="slide-title text-base sm:text-lg md:text-xl">Gấu Bông Lena</h3>
+                  <p class="slide-desc text-sm sm:text-base">Gấu bông thương hiệu nổi tiếng</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <!-- Add navigation - Hide arrows on small screens -->
+        <div class="swiper-button-next collection-next hidden sm:flex"></div>
+        <div class="swiper-button-prev collection-prev hidden sm:flex"></div>
+        <!-- Add pagination -->
+        <div class="swiper-pagination collection-pagination"></div>
+      </div>
+    </section>
+
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GẤU BÔNG HOT TREND</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-bong-hot-trend-products" class="product-list"></div>
+      </div>
+    </section>
+    <div class="see-all-wrapper px-4 my-2 sm:my-4">
+      <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU BÔNG HOT TREND ➤</a>
+    </div>
+    </section>
+
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GẤU BÔNG KHỔNG LỒ</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-bong-khong-lo-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU BÔNG KHỔNG LỒ ➤</a>
+        </div>
+    </section>
+
+    <section class="products px-2 sm:px-4">
+      <h2 class="sale-title text-lg sm:text-xl md:text-2xl">GẤU BÔNG SIÊU SALE</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-bong-giam-gia-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU BÔNG SIÊU SALE ➤</a>
+        </div>
+    </section>
+
+
+    <!-- Gấu Bông Couple -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GẤU BÔNG COUPLE</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-bong-couple-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU BÔNG COUPLE ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 8. GẤU TEDDY Cao Cấp -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GẤU TEDDY CAO CẤP</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-teddy-cao-cap-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU TEDDY CAO CẤP ➤</a>
+        </div>
+    </section>
+
+    <!-- Gấu Bông Ghi Âm -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GẤU BÔNG GHI ÂM</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="gau-bong-ghi-am-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU BÔNG GHI ÂM ➤</a>
+        </div>
+    </section>
+
+    <!-- 9. Gối Bông & Phụ Kiện -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GỐI BÔNG & PHỤ KIỆN</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="goi-bong-and-phu-kien-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ PHỤ KIỆN ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 10. Gối Chăn | Gối Mền -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GỐI CHĂN | GỐI MỀN</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="goi-chan--goi-men-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GỐI CHĂN ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 11. Gối Ôm Dài -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">GỐI ÔM DÀI</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="goi-om-dai-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GỐI ÔM DÀI ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 12. BST Gấu Lena -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">BST GẤU LENA</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="bst-gau-lena-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ GẤU LENA ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 13. Butter Bear -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">BUTTER BEAR</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="butter-bear-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ BUTTER BEAR ➤</a>
+        </div>
+    </section>
+
+
+    <!-- 14. BST Kuromi - Melody - Cinnamoroll -->
+    <section class="products px-2 sm:px-4">
+      <h2 class="text-lg sm:text-xl md:text-2xl">BST KUROMI - MELODY - CINNAMOROLL</h2>
+      <div class="section-container">
+        <div class="product-divider"></div>
+        <div id="bst-kuromi---melody---cinnamoroll-products" class="product-list"></div>
+        <div class="see-all-wrapper px-4 my-2 sm:my-4">
+          <a href="pages/shop.html" class="see-all-btn text-sm sm:text-base">XEM TẤT CẢ BST ➤</a>
+        </div>
+    </section>
+
+    <!-- CHUYỆN NHÀ GẤU -->
+    <section class="py-6 sm:py-8 md:py-12 px-4">
+      <h2 class="text-center text-xl sm:text-2xl md:text-3xl font-bold text-pink-500">CHUYỆN NHÀ GẤU</h2>
+      <hr class="w-16 sm:w-24 mx-auto border-t-2 border-green-300 my-2 sm:my-4">
+
+      <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+        <a href="pages/blog.html" class="flex flex-col sm:flex-row bg-white shadow rounded-lg overflow-hidden">
+          <img src="img/products/4.jpg" loading="lazy" alt="Grand Opening Bemori"
+            class="w-full h-48 sm:w-32 sm:h-auto object-cover">
+          <div class="p-3 sm:p-4">
+            <h3 class="font-semibold text-base sm:text-lg">Grand Opening Bemori 161 Xuân Thủy – Mua Capybara 1K, Chụp
+              Photobooth Miễn
+              Phí</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Tin vui cho những tín đồ yêu gấu bông tại Cầu Giấy! ❤️ Bemori
+              chính thức
+              khai
+              trương cửa hàng mới tại 161 Xuân Thủy, Cầu Giấy và mang đến vô…</p>
+          </div>
+        </a>
+
+        <a href="pages/blog.html" class="flex flex-col sm:flex-row bg-white shadow rounded-lg overflow-hidden">
+          <img src="img/products/1.jpg" loading="lazy" alt="Shop Gấu Bông Đẹp"
+            class="w-full h-48 sm:w-32 sm:h-auto object-cover">
+          <div class="p-3 sm:p-4">
+            <h3 class="font-semibold text-base sm:text-lg">Shop Gấu Bông Đẹp, Giá Rẻ Bất Ngờ "Đốn Tim" Giới Trẻ Tại Hà
+              Nội</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Trên những con phố náo nhiệt của thủ đô Hà Nội, một thế giới gấu
+              bông lấp
+              lánh và đáng yêu đang chờ đón giới trẻ. Những chú gấu bông không chỉ…</p>
+          </div>
+        </a>
+
+        <a href="pages/blog.html" class="flex flex-col sm:flex-row bg-white shadow rounded-lg overflow-hidden">
+          <img src="img/products/2.jpg" loading="lazy" alt="Choáng Ngợp Bộ Trưởng Capybara"
+            class="w-full h-48 sm:w-32 sm:h-auto object-cover">
+          <div class="p-3 sm:p-4">
+            <h3 class="font-semibold text-base sm:text-lg">Choáng Ngợp Bộ Trưởng Capybara Xám Chiếm Nhà Bemori</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Gương mặt nổi rần rần khắp đảo giới trẻ hiện nay không ai khác
+              chính là
+              ngài
+              Bộ trưởng Capybara siêu dễ thương. Để phục vụ nhu cầu mua sắm và dù…</p>
+          </div>
+        </a>
+
+        <a href="pages/blog.html" class="flex flex-col sm:flex-row bg-white shadow rounded-lg overflow-hidden">
+          <img src="img/products/3.jpg" loading="lazy" alt="7 Mẫu Gấu Bông Capybara"
+            class="w-full h-48 sm:w-32 sm:h-auto object-cover">
+          <div class="p-3 sm:p-4">
+            <h3 class="font-semibold text-base sm:text-lg md:text-xl">7 Mẫu Gấu Bông Capybara Dễ Thương Hot Nhất Hiện
+              Nay</h3>
+            <p class="text-xs sm:text-sm text-gray-600">Bộ lông nâu mượt mà, bông "béo" mềm, đôi mắt lim dim đính kèm
+              các phụ kiện
+              bảo mẫu xinh xắn, Capybara trở thành một trong những mẫu gấu bông được…</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="text-center mt-4 sm:mt-8">
+        <a href="pages/blog.html"
+          class="bg-pink-500 text-white py-1.5 sm:py-2 px-4 sm:px-6 rounded-full inline-block text-sm sm:text-base">XEM
+          THÊM</a>
+      </div>
+    </section>
+
+    <!-- TẠI SAO CHỌN BEMORI -->
+    <section class="py-6 sm:py-8 md:py-12 bg-gray-50">
+      <h2 class="text-center text-xl sm:text-2xl md:text-3xl font-bold text-pink-500">TẠI SAO CHỌN BEMORI</h2>
+      <hr class="w-16 sm:w-24 mx-auto border-t-2 border-green-300 my-2 sm:my-4">
+
+      <div class="container mx-auto px-4">
+        <div class="features-list flex flex-wrap md:flex-nowrap justify-center">
+          <div class="feature-card w-full sm:w-[calc(50%-15px)] md:w-[calc(25%-15px)]">
+            <div class="feature-icon">
+              <i class="fas fa-gift"></i>
+            </div>
+            <h3 class="feature-title">Gấu Bông Cao Cấp</h3>
+            <p class="feature-desc">Chỉ sử dụng những chất liệu cao cấp, an toàn và được kiểm định chất lượng nghiêm
+              ngặt.</p>
+          </div>
+
+          <div class="feature-card w-full sm:w-[calc(50%-15px)] md:w-[calc(25%-15px)]">
+            <div class="feature-icon">
+              <i class="fas fa-truck"></i>
+            </div>
+            <h3 class="feature-title">Giao Hàng Toàn Quốc</h3>
+            <p class="feature-desc">Bemori giao hàng đến mọi tỉnh thành trên toàn quốc với chi phí hợp lý và thời gian
+              nhanh chóng.</p>
+          </div>
+
+          <div class="feature-card w-full sm:w-[calc(50%-15px)] md:w-[calc(25%-15px)]">
+            <div class="feature-icon">
+              <i class="fas fa-sync-alt"></i>
+            </div>
+            <h3 class="feature-title">Đổi Trả 30 Ngày</h3>
+            <p class="feature-desc">Cam kết đổi trả sản phẩm trong vòng 30 ngày nếu sản phẩm có lỗi từ nhà sản xuất.</p>
+          </div>
+
+          <div class="feature-card w-full sm:w-[calc(50%-15px)] md:w-[calc(25%-15px)]">
+            <div class="feature-icon">
+              <i class="fas fa-heart"></i>
+            </div>
+            <h3 class="feature-title">Sản Phẩm Đa Dạng</h3>
+            <p class="feature-desc">Hàng nghìn mẫu gấu bông đa dạng về kích thước, màu sắc và phong cách để bạn lựa
+              chọn.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========== SERVICE ICONS =========== -->
+    <section class="services py-4 sm:py-6">
+      <div class="service-container mx-auto px-2 sm:px-4">
+        <div class="service-row flex overflow-auto no-scrollbar">
+          <a href="#" class="service-item shrink-0 w-1/5 text-center px-1 sm:px-2">
+            <div class="service-icon-wrapper mb-2">
+              <img src="img/icons/icon-giao-hang.png" loading="lazy" alt="Giao hàng tận nhà"
+                class="service-icon mx-auto">
+            </div>
+            <span class="service-name block text-xs sm:text-sm">GIAO HÀNG TẬN NHÀ</span>
+          </a>
+          <a href="#" class="service-item shrink-0 w-1/5 text-center px-1 sm:px-2">
+            <div class="service-icon-wrapper mb-2">
+              <img src="img/icons/icon-boc-qua.png" loading="lazy" alt="Bọc quà giá rẻ" class="service-icon mx-auto">
+            </div>
+            <span class="service-name block text-xs sm:text-sm">BỌC QUÀ GIÁ RẺ</span>
+          </a>
+          <a href="#" class="service-item shrink-0 w-1/5 text-center px-1 sm:px-2">
+            <div class="service-icon-wrapper mb-2">
+              <img src="img/icons/icon-tang-thiep.png" loading="lazy" alt="Tặng thiệp miễn phí"
+                class="service-icon mx-auto">
+            </div>
+            <span class="service-name block text-xs sm:text-sm">TẶNG THIỆP MIỄN PHÍ</span>
+          </a>
+          <a href="#" class="service-item shrink-0 w-1/5 text-center px-1 sm:px-2">
+            <div class="service-icon-wrapper mb-2">
+              <img src="img/icons/icon-giat-gau.png" loading="lazy" alt="Giặt gấu bông" class="service-icon mx-auto">
+            </div>
+            <span class="service-name block text-xs sm:text-sm">GIẶT GẤU BÔNG</span>
+          </a>
+          <a href="#" class="service-item shrink-0 w-1/5 text-center px-1 sm:px-2">
+            <div class="service-icon-wrapper mb-2">
+              <img src="img/icons/icon-nen-nho.png" loading="lazy" alt="Nén nhỏ gấu" class="service-icon mx-auto">
+            </div>
+            <span class="service-name block text-xs sm:text-sm">NÉN NHỎ GẤU</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <div id="siteFooter" class="w-full"></div>
+
+    <!-- Quick Navigation Sidebar (Right Side) -->
+    <div class="quick-nav hidden lg:block">
+      <a href="index.html" class="quick-nav-item" title="Trang chủ">
+        <i class="fas fa-home"></i>
+        <span>Trang chủ</span>
+      </a>
+      <a href="#gau-bong-hot-trend-products" class="quick-nav-item" title="Hot Trend">
+        <i class="fas fa-fire"></i>
+        <span>Hot Trend</span>
+      </a>
+      <a href="pages/wishlist.html" class="quick-nav-item" title="Yêu thích">
+        <i class="fas fa-heart"></i>
+        <span>Yêu thích</span>
+      </a>
+      <a href="pages/sale.html" class="quick-nav-item" title="Giảm giá">
+        <i class="fas fa-tags"></i>
+        <span>Giảm giá</span>
+      </a>
+    </div>
+
+    <!-- JS -->
+    <script type="module">
+      import { loadPartials } from './assets/js/main.js';
+      loadPartials();
+    </script>
+    <script src="assets/js/sidebar.js"></script>
+  </div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Product Preview Modal -->
+  <div class="product-preview">
+    <div class="preview-content">
+      <div class="preview-header">
+        <div class="preview-title">Xem nhanh sản phẩm</div>
+        <button class="preview-close">&times;</button>
+      </div>
+      <div class="preview-body flex-col md:flex-row">
+        <div class="preview-image w-full md:w-1/2">
+          <img src="" alt="Preview product" id="preview-product-image" class="w-full">
+        </div>
+        <div class="preview-info w-full md:w-1/2">
+          <h3 class="preview-title text-base sm:text-lg md:text-xl" id="preview-product-title">Tên sản phẩm</h3>
+          <div class="preview-price">
+            <span class="preview-sale-price text-lg sm:text-xl md:text-2xl" id="preview-product-price">499,000₫</span>
+            <span class="preview-original-price text-sm sm:text-base"
+              id="preview-product-original-price">599,000₫</span>
+          </div>
+
+          <!-- Thông số sản phẩm -->
+          <div class="product-specs mt-4">
+            <h4 class="text-sm font-semibold mb-2">Thông số sản phẩm:</h4>
+            <ul class="specs-list text-sm space-y-2">
+              <li class="flex justify-between">
+                <span class="text-gray-600">Kích thước:</span>
+                <span id="preview-product-size">30 x 25 x 20 cm</span>
+              </li>
+              <li class="flex justify-between">
+                <span class="text-gray-600">Chất liệu:</span>
+                <span id="preview-product-material">Polyester cao cấp</span>
+              </li>
+              <li class="flex justify-between">
+                <span class="text-gray-600">Trọng lượng:</span>
+                <span id="preview-product-weight">500g</span>
+              </li>
+              <li class="flex justify-between">
+                <span class="text-gray-600">Xuất xứ:</span>
+                <span id="preview-product-origin">Việt Nam</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Mô tả sản phẩm -->
+          <div class="product-description mt-4">
+            <h4 class="text-sm font-semibold mb-2">Mô tả sản phẩm:</h4>
+            <p class="text-sm text-gray-600" id="preview-product-description">
+              Gấu bông siêu mềm mại và êm ái, với kích thước vừa phải phù hợp để ôm hoặc trang trí. Làm từ chất liệu cao
+              cấp, an toàn cho trẻ em và người lớn.
+            </p>
+          </div>
+
+          <!-- Đánh giá sản phẩm -->
+          <div class="product-reviews mt-4">
+            <h4 class="text-sm font-semibold mb-2">Đánh giá sản phẩm:</h4>
+            <div class="reviews-summary flex items-center mb-2">
+              <div class="rating-stars text-yellow-400">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <span class="rating-number ml-2 text-sm">4.5/5</span>
+              <span class="review-count ml-2 text-sm text-gray-600">(128 đánh giá)</span>
+            </div>
+            <div class="reviews-stats text-sm">
+              <div class="stat-item flex items-center mb-1">
+                <span class="w-16">5 sao</span>
+                <div class="progress-bar flex-1 h-2 bg-gray-200 rounded-full mx-2">
+                  <div class="progress h-full bg-yellow-400 rounded-full" style="width: 70%"></div>
+                </div>
+                <span class="w-12 text-right">70%</span>
+              </div>
+              <div class="stat-item flex items-center mb-1">
+                <span class="w-16">4 sao</span>
+                <div class="progress-bar flex-1 h-2 bg-gray-200 rounded-full mx-2">
+                  <div class="progress h-full bg-yellow-400 rounded-full" style="width: 20%"></div>
+                </div>
+                <span class="w-12 text-right">20%</span>
+              </div>
+              <div class="stat-item flex items-center mb-1">
+                <span class="w-16">3 sao</span>
+                <div class="progress-bar flex-1 h-2 bg-gray-200 rounded-full mx-2">
+                  <div class="progress h-full bg-yellow-400 rounded-full" style="width: 5%"></div>
+                </div>
+                <span class="w-12 text-right">5%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-actions flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
+            <button class="add-to-cart-btn text-sm sm:text-base">
+              <i class="fas fa-shopping-cart"></i>
+              Thêm vào giỏ hàng
+            </button>
+            <button class="wishlist-btn text-sm sm:text-base">
+              <i class="fas fa-heart"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

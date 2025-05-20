@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Quản lý thông tin cá nhân, đơn hàng và địa chỉ tại Bemori - Cửa hàng gấu bông cao cấp" />
+  <meta name="keywords" content="profile, tài khoản, gấu bông, bemori, thông tin người dùng" />
+  <meta name="author" content="Bemori" />
+  <title>Tài khoản của tôi | Bemori - Gấu Bông Cao Cấp</title>
+  <link rel="icon" type="image/png" href="img/logos/favicon.png" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #ec4899;
+      --primary-hover: #db2777;
+      --secondary-color: #f9a8d4;
+      --text-color: #1f2937;
+      --light-bg: #f9fafb;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      background-color: #f5f7fa;
+      color: var(--text-color);
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    .profile-transition {
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* AVATAR STYLES - COMPLETELY REWRITTEN */
+    .avatar-wrapper {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .avatar-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 3px solid white;
+      background-color: #f5f5f5;
+      overflow: hidden;
+    }
+
+    .avatar-image-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    .avatar-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+    }
+
+    .avatar-upload-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      border-radius: 50%;
+      transition: opacity 0.2s ease;
+      z-index: 2;
+    }
+
+    .avatar-container:hover .avatar-upload-overlay {
+      opacity: 1;
+    }
+
+    /* Fix specifically for webkit browsers */
+    @supports (-webkit-touch-callout: none) {
+      .avatar-image-container {
+        -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+      }
+    }
+
+    /* Cross-browser fixes */
+    .avatar-container,
+    .avatar-image-container,
+    .avatar-image {
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    /* Media queries for responsive avatars */
+    @media (max-width: 768px) {
+      .avatar-wrapper {
+        width: 96px;
+        height: 96px;
+      }
+
+      .sidebar-nav-item {
+        padding: 0.5rem 0.75rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Attempt a completely different approach for avatar */
+    @media screen and (max-width: 1000px) {
+      .avatar-wrapper {
+        width: 96px;
+        height: 96px;
+      }
+    }
+
+    .tab-active {
+      position: relative;
+    }
+
+    .tab-active::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--primary-color);
+      transform: scaleX(1);
+      transition: transform 0.3s ease;
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .profile-card {
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+      background: white;
+      border-radius: 0.75rem;
+    }
+
+    .profile-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .sidebar-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .sidebar-nav-item:hover:not(.active) {
+      background-color: #f3f4f6;
+      color: var(--primary-color);
+    }
+
+    .sidebar-nav-item.active {
+      background-color: #fdf2f8;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .sidebar-nav-item i {
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      color: white;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background-color: #10b981;
+    }
+
+    .notification.error {
+      background-color: #ef4444;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      background-color: #fff;
+      color: #1f2937;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+      outline: none;
+    }
+
+    .form-label {
+      position: absolute;
+      top: -0.7rem;
+      left: 0.8rem;
+      padding: 0 0.25rem;
+      background-color: white;
+      font-size: 0.85rem;
+      color: #6b7280;
+      transition: all 0.2s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid #d1d5db;
+      color: #4b5563;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .badge-primary {
+      background-color: #fdf2f8;
+      color: var(--primary-color);
+    }
+
+    /* Dashboard stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .stat-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      background-color: #fdf2f8;
+      color: var(--primary-color);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6b7280;
+    }
+
+    /* Empty state */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 4rem;
+      height: 4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f3f4f6;
+      color: #9ca3af;
+      font-size: 1.75rem;
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-[Quicksand]">
+  <!-- Header -->
+  <div id="siteHeader"></div>
+
+  <!-- Notification System -->
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle mr-2"></i>
+    <span id="notificationMessage"></span>
+  </div>
+
+  <!-- Profile Section -->
+  <section class="py-8 md:py-12">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <!-- Profile Header -->
+        <div class="profile-card mb-8 p-6 md:p-8">
+          <div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div class="avatar-wrapper">
+              <div class="avatar-container" id="avatarContainer">
+                <div class="avatar-image-container">
+                  <img id="userAvatar" src="" alt="Avatar" class="avatar-image">
+                </div>
+                <div class="avatar-upload-overlay cursor-pointer" id="changeAvatarOverlay">
+                  <i class="fas fa-camera text-white text-xl"></i>
+                </div>
+              </div>
+            </div>
+            <div class="text-center md:text-left flex-1">
+              <h1 id="userName" class="text-2xl md:text-3xl font-bold text-gray-800 mb-1"></h1>
+              <p id="userEmail" class="text-gray-600 mb-3"></p>
+
+              <!-- Stats Overview -->
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                  </div>
+                  <div class="stat-value">0</div>
+                  <div class="stat-label">Đơn hàng</div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <div class="stat-value">0</div>
+                  <div class="stat-label">Yêu thích</div>
+                </div>
+
+                <div class="stat-card">
+                  <div class="stat-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                  </div>
+                  <div class="stat-value">0</div>
+                  <div class="stat-label">Địa chỉ</div>
+                </div>
+              </div>
+
+              <button id="logoutBtn" class="btn btn-outline mt-4">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Đăng xuất</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <!-- Sidebar -->
+          <div class="md:col-span-1">
+            <div class="profile-card p-4">
+              <nav>
+                <a href="#profile" class="sidebar-nav-item active">
+                  <i class="fas fa-user"></i>
+                  <span>Thông tin cá nhân</span>
+                </a>
+                <a href="#orders" class="sidebar-nav-item">
+                  <i class="fas fa-shopping-bag"></i>
+                  <span>Đơn hàng của tôi</span>
+                </a>
+                <a href="#address" class="sidebar-nav-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>Sổ địa chỉ</span>
+                </a>
+                <a href="#password" class="sidebar-nav-item">
+                  <i class="fas fa-lock"></i>
+                  <span>Đổi mật khẩu</span>
+                </a>
+                <a href="#wishlists" class="sidebar-nav-item">
+                  <i class="fas fa-heart"></i>
+                  <span>Sản phẩm yêu thích</span>
+                </a>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Main Content -->
+          <div class="md:col-span-3">
+            <!-- Profile Info -->
+            <div id="profile" class="profile-card p-6 md:p-8 mb-6 animate-fade-in">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Thông tin cá nhân</h2>
+                <span class="badge badge-primary">
+                  <i class="fas fa-user-circle mr-1"></i>
+                  Thành viên
+                </span>
+              </div>
+
+              <form id="profileForm" class="space-y-6">
+                <div class="input-group">
+                  <label for="name" class="form-label">Họ và tên</label>
+                  <input type="text" id="name" class="form-input">
+                </div>
+                <div class="input-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" id="email" class="form-input" readonly>
+                </div>
+                <div class="input-group">
+                  <label for="phone" class="form-label">Số điện thoại</label>
+                  <input type="tel" id="phone" class="form-input">
+                </div>
+                <div class="input-group">
+                  <label for="birthdate" class="form-label">Ngày sinh</label>
+                  <input type="date" id="birthdate" class="form-input">
+                </div>
+                <div id="profileFormButtons" class="flex justify-end gap-3">
+                  <button type="button" id="resetProfileBtn" class="btn btn-outline">
+                    Hủy
+                  </button>
+                  <button type="submit" id="saveProfileBtn" class="btn btn-primary">
+                    <span>Lưu thay đổi</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Orders -->
+            <div id="orders" class="profile-card p-6 md:p-8 mb-6 hidden animate-fade-in">
+              <h2 class="text-xl font-bold mb-6">Đơn hàng của tôi</h2>
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Chưa có đơn hàng nào</h3>
+                <p class="text-gray-500 mb-6">Bạn chưa thực hiện đơn hàng nào!</p>
+                <a href="products.html" class="btn btn-primary">
+                  <i class="fas fa-shopping-cart mr-2"></i>
+                  Mua sắm ngay
+                </a>
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div id="address" class="profile-card p-6 md:p-8 mb-6 hidden animate-fade-in">
+              <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold">Sổ địa chỉ</h2>
+                <button class="btn btn-primary">
+                  <i class="fas fa-plus mr-1"></i>
+                  Thêm địa chỉ mới
+                </button>
+              </div>
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Chưa có địa chỉ nào</h3>
+                <p class="text-gray-500 mb-4">Thêm địa chỉ để thuận tiện cho việc giao hàng</p>
+              </div>
+            </div>
+
+            <!-- Change Password -->
+            <div id="password" class="profile-card p-6 md:p-8 mb-6 hidden animate-fade-in">
+              <h2 class="text-xl font-bold mb-6">Đổi mật khẩu</h2>
+              <form id="passwordForm" class="space-y-6">
+                <div class="input-group">
+                  <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                  <input type="password" id="currentPassword" class="form-input">
+                </div>
+                <div class="input-group">
+                  <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                  <input type="password" id="newPassword" class="form-input">
+                </div>
+                <div class="input-group">
+                  <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                  <input type="password" id="confirmPassword" class="form-input">
+                </div>
+                <div class="password-strength mt-2 mb-4">
+                  <div class="text-sm text-gray-600 mb-1">Độ mạnh mật khẩu</div>
+                  <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div id="passwordStrength" class="h-full bg-red-500" style="width: 0%"></div>
+                  </div>
+                </div>
+                <div class="flex justify-end gap-3">
+                  <button type="button" id="resetPasswordBtn" class="btn btn-outline">
+                    Hủy
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    <span>Đổi mật khẩu</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Wishlists -->
+            <div id="wishlists" class="profile-card p-6 md:p-8 mb-6 hidden animate-fade-in">
+              <h2 class="text-xl font-bold mb-6">Sản phẩm yêu thích</h2>
+              <div class="empty-state">
+                <div class="empty-icon">
+                  <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-700 mb-2">Chưa có sản phẩm yêu thích</h3>
+                <p class="text-gray-500 mb-6">Thêm sản phẩm yêu thích để xem lại sau!</p>
+                <a href="products.html" class="btn btn-primary">
+                  <i class="fas fa-shopping-cart mr-2"></i>
+                  Khám phá sản phẩm
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="siteFooter"></div>
+
+  <!-- JS -->
+  <script type="module">
+    import { loadPartials } from '../assets/js/main.js';
+    loadPartials();
+
+    // Check authentication
+    document.addEventListener('DOMContentLoaded', () => {
+      // Show notification function
+      function showNotification(message, type = 'success') {
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notificationMessage');
+
+        notification.className = 'notification';
+        notification.classList.add(type);
+        notificationMessage.textContent = message;
+
+        // Show notification
+        setTimeout(() => {
+          notification.classList.add('show');
+        }, 100);
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+
+      // Check for user in localStorage
+      const user = JSON.parse(localStorage.getItem('teddy_user'));
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Update profile info with animation
+      const userAvatar = document.getElementById('userAvatar');
+      const userName = document.getElementById('userName');
+      const userEmail = document.getElementById('userEmail');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const phoneInput = document.getElementById('phone');
+      const birthdateInput = document.getElementById('birthdate');
+
+      // Set default values and handle onload/onerror events
+      userAvatar.style.display = "none"; // Ẩn trước khi tải để tránh hiển thị sai vị trí
+
+      // Các kiểm tra bổ sung cho trình duyệt
+      function fixAvatarDisplay() {
+        // Xóa bất kỳ thuộc tính inline position nào có thể bị thêm vào
+        userAvatar.style.position = ""; // Đặt lại để sử dụng CSS
+        userAvatar.style.top = "";
+        userAvatar.style.left = "";
+
+        // Đảm bảo kích thước và định vị đúng
+        userAvatar.style.width = "100%";
+        userAvatar.style.height = "100%";
+        userAvatar.style.objectFit = "cover";
+        userAvatar.style.objectPosition = "center";
+        userAvatar.style.borderRadius = "50%";
+      }
+
+      // Chạy sửa lỗi khi tải xong
+      userAvatar.onload = function () {
+        this.style.display = "block";
+        this.style.opacity = "1";
+        fixAvatarDisplay();
+      };
+
+      userAvatar.onerror = function () {
+        this.src = '../img/avatars/user1.jpg';
+        this.style.display = "block";
+        this.style.opacity = "1";
+        fixAvatarDisplay();
+      };
+
+      // Chạy nó ngay lập tức và sau khi tải
+      fixAvatarDisplay();
+
+      // Đặt opacity thấp hơn trong khi tải
+      userAvatar.style.opacity = "0.7";
+
+      // Đặt nguồn hình ảnh sau khi thiết lập trình xử lý sự kiện
+      if (user && user.avatar) {
+        userAvatar.src = user.avatar;
+      } else {
+        userAvatar.src = '../img/avatars/user1.jpg';
+      }
+      userName.textContent = user.name || 'Người dùng';
+      userEmail.textContent = user.email || '';
+      nameInput.value = user.name || '';
+      emailInput.value = user.email || '';
+      phoneInput.value = user.phone || '';
+      birthdateInput.value = user.birthdate || '';
+
+      // Navigation with smooth transitions
+      const navLinks = document.querySelectorAll('.sidebar-nav-item');
+      const sections = document.querySelectorAll('#profile, #orders, #address, #password, #wishlists');
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = link.getAttribute('href').substring(1);
+
+          // Update active state with transition
+          navLinks.forEach(l => {
+            l.classList.remove('active');
+          });
+          link.classList.add('active');
+
+          // Show target section with animation
+          sections.forEach(section => {
+            section.classList.add('hidden');
+            if (section.id === target) {
+              section.classList.remove('hidden');
+            }
+          });
+        });
+      });
+
+      // Password strength meter
+      const newPasswordInput = document.getElementById('newPassword');
+      const passwordStrength = document.getElementById('passwordStrength');
+
+      newPasswordInput.addEventListener('input', () => {
+        const password = newPasswordInput.value;
+        let strength = 0;
+
+        if (password.length >= 8) strength += 25;
+        if (password.match(/[A-Z]/)) strength += 25;
+        if (password.match(/[0-9]/)) strength += 25;
+        if (password.match(/[^A-Za-z0-9]/)) strength += 25;
+
+        passwordStrength.style.width = `${strength}%`;
+
+        if (strength <= 25) {
+          passwordStrength.className = 'h-full bg-red-500';
+        } else if (strength <= 50) {
+          passwordStrength.className = 'h-full bg-orange-500';
+        } else if (strength <= 75) {
+          passwordStrength.className = 'h-full bg-yellow-500';
+        } else {
+          passwordStrength.className = 'h-full bg-green-500';
+        }
+      });
+
+      // Handle profile update with localStorage
+      document.getElementById('profileForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Show loading state
+        const saveBtn = document.getElementById('saveProfileBtn');
+        const originalBtnContent = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<div class="loading-spinner"></div>';
+        saveBtn.disabled = true;
+
+        // Get form values
+        const name = nameInput.value;
+        const phone = phoneInput.value;
+        const birthdate = birthdateInput.value;
+
+        setTimeout(() => {
+          try {
+            // Update user in localStorage
+            const updatedUser = {
+              ...user,
+              name,
+              phone,
+              birthdate
+            };
+
+            localStorage.setItem('teddy_user', JSON.stringify(updatedUser));
+
+            // Update UI
+            userName.textContent = name;
+
+            // Show success notification
+            showNotification('Cập nhật thông tin thành công!');
+
+            // Reset button state
+            saveBtn.innerHTML = originalBtnContent;
+            saveBtn.disabled = false;
+          } catch (error) {
+            // Show error notification
+            showNotification('Đã xảy ra lỗi khi cập nhật thông tin!', 'error');
+
+            // Reset button state
+            saveBtn.innerHTML = originalBtnContent;
+            saveBtn.disabled = false;
+          }
+        }, 1000); // Simulate API delay
+      });
+
+      // Reset profile form
+      document.getElementById('resetProfileBtn').addEventListener('click', () => {
+        nameInput.value = user.name || '';
+        phoneInput.value = user.phone || '';
+        birthdateInput.value = user.birthdate || '';
+      });
+
+      // Handle password change with localStorage
+      document.getElementById('passwordForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (newPassword !== confirmPassword) {
+          showNotification('Mật khẩu mới không khớp!', 'error');
+          return;
+        }
+
+        // Simple validation - in real app you'd need to check against stored password hash
+        if (currentPassword === '') {
+          showNotification('Vui lòng nhập mật khẩu hiện tại!', 'error');
+          return;
+        }
+
+        // Show loading state
+        const submitBtn = document.getElementById('passwordForm').querySelector('button[type="submit"]');
+        const originalBtnContent = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<div class="loading-spinner"></div>';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+          try {
+            // Update password in localStorage (in a real app, you'd update a hashed password)
+            const updatedUser = {
+              ...user,
+              password: newPassword // This is just for demo - in reality you'd hash this
+            };
+
+            localStorage.setItem('teddy_user', JSON.stringify(updatedUser));
+
+            // Reset form
+            document.getElementById('passwordForm').reset();
+            passwordStrength.style.width = '0%';
+            passwordStrength.className = 'h-full bg-red-500';
+
+            // Show success notification
+            showNotification('Đổi mật khẩu thành công!');
+
+            // Reset button state
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = false;
+          } catch (error) {
+            // Show error notification
+            showNotification('Đã xảy ra lỗi khi đổi mật khẩu!', 'error');
+
+            // Reset button state
+            submitBtn.innerHTML = originalBtnContent;
+            submitBtn.disabled = false;
+          }
+        }, 1000); // Simulate API delay
+      });
+
+      // Handle reset password form
+      document.getElementById('resetPasswordBtn').addEventListener('click', () => {
+        document.getElementById('passwordForm').reset();
+        passwordStrength.style.width = '0%';
+        passwordStrength.className = 'h-full bg-red-500';
+      });
+
+      // Handle avatar change with better UX
+      document.getElementById('changeAvatarOverlay').addEventListener('click', () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+
+        input.onchange = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          // Show loading indicator on avatar
+          userAvatar.style.opacity = '0.5';
+
+          // Validate file size (max 5MB)
+          if (file.size > 5 * 1024 * 1024) {
+            showNotification('Kích thước ảnh quá lớn (tối đa 5MB)!', 'error');
+            userAvatar.style.opacity = '1';
+            return;
+          }
+
+          // Convert to base64 for localStorage
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const base64Image = event.target.result;
+
+            setTimeout(() => {
+              try {
+                // Update user in localStorage
+                const updatedUser = {
+                  ...user,
+                  avatar: base64Image
+                };
+
+                localStorage.setItem('teddy_user', JSON.stringify(updatedUser));
+
+                // Update UI
+                userAvatar.src = base64Image;
+                userAvatar.style.opacity = '1';
+
+                // Add animation
+                userAvatar.style.animation = 'pulse 0.5s';
+                setTimeout(() => {
+                  userAvatar.style.animation = '';
+                }, 500);
+
+                // Show success notification
+                showNotification('Cập nhật ảnh đại diện thành công!');
+              } catch (error) {
+                userAvatar.style.opacity = '1';
+                showNotification('Đã xảy ra lỗi khi cập nhật ảnh đại diện!', 'error');
+              }
+            }, 1000); // Simulate API delay
+          };
+
+          reader.readAsDataURL(file);
+        };
+
+        input.click();
+      });
+
+      // Handle logout with confirmation
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        if (confirm('Bạn có chắc muốn đăng xuất?')) {
+          // Add logout animation
+          document.body.style.opacity = '0.5';
+          setTimeout(() => {
+            localStorage.removeItem('teddy_user');
+            localStorage.removeItem('teddy_token');
+            window.location.href = '../index.html';
+          }, 500);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

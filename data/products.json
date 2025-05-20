@@ -1,0 +1,342 @@
+[
+  {
+    "category": "gau-bong-hot-trend",
+    "name": "Gấu Bông Capybara Cosplay Cá Mập",
+    "price": "275.000",
+    "image": "img/products/gaubong (10).jpg",
+    "sizes": ["25cm", "40cm", "60cm", "1m"]
+  },
+  {
+    "category": "gau-bong-hot-trend",
+    "name": "Gấu Bông Baby Three Thỏ Lông Mịn",
+    "price": "185.000",
+    "image": "img/products/gaubong (10).jpg",
+    "sizes": ["30cm", "45cm", "1m"]
+  },
+  {
+    "category": "gau-bong-hot-trend",
+    "name": "Gấu Bông Stitch Ôm Vịt",
+    "price": "195.000",
+    "image": "img/products/gaubong (10).jpg",
+    "sizes": ["20cm", "35cm", "60cm"]
+  },
+  {
+    "category": "gau-bong-hot-trend",
+    "name": "Gấu Bông Thú Mỏ Vịt",
+    "price": "535.000",
+    "image": "img/products/gaubong (10).jpg",
+    "sizes": ["60cm", "85cm", "1m2"]
+  },
+  {
+    "category": "gau-bong-khong-lo",
+    "name": "Gấu Bông Baby Three Cosplay Capybara Khổng Lồ",
+    "price": "1.850.000",
+    "image": "img/products/big1.jpg",
+    "sizes": ["1m5"]
+  },
+  {
+    "category": "gau-bong-khong-lo",
+    "name": "Gấu Bông Baby Three Cosplay Gấu Bụng Sao Khổng Lồ",
+    "price": "1.850.000",
+    "image": "img/products/big2.jpg",
+    "sizes": ["1m5"]
+  },
+  {
+    "category": "gau-bong-khong-lo",
+    "name": "Gấu Bông Baby Three Cosplay Thỏ Hồng Khổng Lồ",
+    "price": "2.450.000",
+    "image": "img/products/big3.jpg",
+    "sizes": ["1m5"]
+  },
+  {
+    "category": "gau-bong-khong-lo",
+    "name": "Cánh Cụt Bông Đeo Yếm Khổng Lồ",
+    "price": "1.650.000",
+    "image": "img/products/big4.jpg",
+    "sizes": ["1m5"]
+  },
+  {
+    "category": "gau-bong-giam-gia",
+    "name": "Blindbox Tyke 3 Cung Hoàng Đạo",
+    "price": "161.000",
+    "oldPrice": "230.000",
+    "image": "img/products/sale1.jpg",
+    "sizes": ["30cm"]
+  },
+  {
+    "category": "gau-bong-giam-gia",
+    "name": "Bộ 3 Gấu Bông Thú Mỏ Vịt",
+    "price": "66.500",
+    "oldPrice": "95.000",
+    "image": "img/products/sale2.jpg",
+    "sizes": ["25cm"]
+  },
+  {
+    "category": "gau-bong-giam-gia",
+    "name": "Gấu Bông Mihi Doll",
+    "price": "90.000",
+    "oldPrice": "120.000",
+    "image": "img/products/sale4.jpg",
+    "sizes": ["20cm", "30cm", "50cm", "1m"]
+  },
+  {
+    "category": "gau-bong-giam-gia",
+    "name": "Búp Bê Đen Hồng",
+    "price": "75.000",
+    "oldPrice": "125.000",
+    "image": "img/products/sale4.jpg",
+    "sizes": ["25cm"]
+  },
+  {
+    "category": "gau-bong-couple",
+    "name": "Gấu Bông Cặp Đôi BearHug – Gấu Hugo & Rosie",
+    "price": "285.000",
+    "image": "img/products/couple1.jpg",
+    "sizes": ["25cm"]
+  },
+  {
+    "category": "gau-bong-couple",
+    "name": "Gấu Bông Couple Dâu Rể Capyboo",
+    "price": "295.000",
+    "image": "img/products/couple2.jpg",
+    "sizes": ["28cm"]
+  },
+  {
+    "category": "gau-bong-couple",
+    "name": "Gấu Bông Couple Dâu Rể Thỏ Snowy",
+    "price": "295.000",
+    "image": "img/products/couple3.jpg",
+    "sizes": ["25cm"]
+  },
+  {
+    "category": "gau-bong-couple",
+    "name": "Gấu Bông Cặp Đôi BearHug – Thỏ Bunny & Daisy",
+    "price": "285.000",
+    "image": "img/products/couple4.jpg",
+    "sizes": ["25cm"]
+  },
+  {
+    "category": "gau-bong-ghi-am",
+    "name": "Gấu Bông Capybara Thiên Thần Ghi Âm",
+    "price": "395.000",
+    "image": "img/products/record1.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "gau-bong-ghi-am",
+    "name": "Gấu Bông BabyBoo Ghi Âm",
+    "price": "425.000",
+    "image": "img/products/record2.jpg",
+    "sizes": ["55cm", "90cm"]
+  },
+  {
+    "category": "gau-bong-ghi-am",
+    "name": "Gấu Bông Capybara Hồng Đeo Bóng Nhảy Hát",
+    "price": "355.000",
+    "image": "img/products/record3.jpg",
+    "sizes": ["35cm"]
+  },
+  {
+    "category": "gau-bong-ghi-am",
+    "name": "Gấu Bông Ghi Âm Head Tales",
+    "price": "335.000",
+    "image": "img/products/record4.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "gau-teddy-cao-cap",
+    "name": "Gấu Bông Teddy Đeo Nhẫn",
+    "price": "455.000",
+    "image": "img/products/teddy1.jpg",
+    "sizes": ["80cm", "1m", "1m2", "1m4"]
+  },
+  {
+    "category": "gau-teddy-cao-cap",
+    "name": "Gấu Bông Teddy Angel Hồng",
+    "price": "295.000",
+    "image": "img/products/teddy1.jpg",
+    "sizes": ["65cm", "80cm", "1m1", "1m3", "1m7", "2m2", "2m5"]
+  },
+  {
+    "category": "gau-teddy-cao-cap",
+    "name": "Gấu Bông Teddy Angel Tím",
+    "price": "455.000",
+    "image": "img/products/teddy3.jpg",
+    "sizes": ["80cm", "1m1", "1m3", "1m6", "2m2"]
+  },
+  {
+    "category": "gau-teddy-cao-cap",
+    "name": "Gấu Bông Teddy Socola",
+    "price": "425.000",
+    "image": "img/products/teddy4.jpg",
+    "sizes": ["80cm", "1m1", "1m4", "1m7", "2m"]
+  },
+  {
+    "category": "goi-bong-and-phu-kien",
+    "name": "Gối Cổ Biến Hình",
+    "price": "175.000",
+    "image": "img/products/phukien1.jpg",
+    "sizes": ["30cm"]
+  },
+  {
+    "category": "goi-bong-and-phu-kien",
+    "name": "Thú Nhồi Bông Quả Bóng Đá",
+    "price": "125.000",
+    "image": "img/products/phukien2.jpg",
+    "sizes": ["30x20cm", "40x30cm"]
+  },
+  {
+    "category": "goi-bong-and-phu-kien",
+    "name": "Túi Đeo Chéo Cún Đeo Yếm",
+    "price": "315.000",
+    "image": "img/products/phukien3.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "goi-bong-and-phu-kien",
+    "name": "Thú Nhồi Bông Quả Bóng Bi-a",
+    "price": "175.000",
+    "image": "img/products/phukien4.jpg",
+    "sizes": ["40x30cm"]
+  },
+  {
+    "category": "goi-chan--goi-men",
+    "name": "Gối Chăn Mền Stitch ôm vịt",
+    "price": "365.000",
+    "image": "img/products/goichan1.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "goi-chan--goi-men",
+    "name": "Gối Chăn Mền Hoạt Hình",
+    "price": "455.000",
+    "image": "img/products/goichan2.jpg",
+    "sizes": ["50cm"]
+  },
+  {
+    "category": "goi-chan--goi-men",
+    "name": "Gối Chăn Mền Heo Lotso Ôm Bình Sữa",
+    "price": "325.000",
+    "image": "img/products/goichan3.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "goi-chan--goi-men",
+    "name": "Gối Chăn Mền Labubu",
+    "price": "275.000",
+    "image": "img/products/goichan4.jpg",
+    "sizes": ["38cm"]
+  },
+  {
+    "category": "goi-om-dai",
+    "name": "Gối Ôm Hải Cẩu",
+    "price": "525.000",
+    "image": "img/products/goiom1.jpg",
+    "sizes": ["1m", "70cm"]
+  },
+  {
+    "category": "goi-om-dai",
+    "name": "Gối Ôm Mèo Hoàng Thượng Cosplay Thú",
+    "price": "525.000",
+    "image": "img/products/goiom2.jpg",
+    "sizes": ["1m", "1m2"]
+  },
+  {
+    "category": "goi-om-dai",
+    "name": "Gấu Bông Croissant Capybara",
+    "price": "165.000",
+    "image": "img/products/goiom3.jpg",
+    "sizes": ["45cm", "70cm", "85cm"]
+  },
+  {
+    "category": "goi-om-dai",
+    "name": "Bộ 3 Gối Ôm Hải Cẩu",
+    "price": "445.000",
+    "image": "img/products/goiom4.jpg",
+    "sizes": ["65cm"]
+  },
+  {
+    "category": "bst-gau-lena",
+    "name": "Lena Cosplay Khủng Long Xanh Lá",
+    "price": "125.000",
+    "image": "img/products/lena2.jpg",
+    "sizes": ["25cm", "35cm", "45cm", "60cm"]
+  },
+  {
+    "category": "bst-gau-lena",
+    "name": "Lena Cosplay Loopy Hồng",
+    "price": "245.000",
+    "image": "img/products/lena2.jpg",
+    "sizes": ["35cm", "45cm", "60cm", "70cm"]
+  },
+  {
+    "category": "bst-gau-lena",
+    "name": "Lena Cosplay Chuột Capybara",
+    "price": "165.000",
+    "image": "img/products/lena4.jpg",
+    "sizes": ["35cm", "45cm", "65cm"]
+  },
+  {
+    "category": "bst-gau-lena",
+    "name": "Gấu Bông Lena Mũ Yếm",
+    "price": "175.000",
+    "image": "img/products/lena4.jpg",
+    "sizes": ["28cm", "38cm", "55cm", "1m1"]
+  },
+  {
+    "category": "butter-bear",
+    "name": "Gia Đình Butter Bear",
+    "price": "345.000",
+    "image": "img/products/butter1.jpg",
+    "sizes": ["40cm"]
+  },
+  {
+    "category": "butter-bear",
+    "name": "Gấu Bông Butter Bear",
+    "price": "155.000",
+    "image": "img/products/butter1.jpg",
+    "sizes": ["30cm", "45cm", "55cm", "85cm"]
+  },
+  {
+    "category": "butter-bear",
+    "name": "Butter Bear Ngồi Cầm Hoa",
+    "price": "185.000",
+    "image": "img/products/butter2.jpg",
+    "sizes": ["35cm", "45cm", "60cm"]
+  },
+  {
+    "category": "butter-bear",
+    "name": "Butter Bear Ngồi Đeo Yếm",
+    "price": "185.000",
+    "image": "img/products/butter2.jpg",
+    "sizes": ["35cm", "45cm", "60cm"]
+  },
+  {
+    "category": "bst-kuromi---melody---cinnamoroll",
+    "name": "Kuromi Đeo Túi",
+    "price": "245.000",
+    "image": "img/products/kuromi3.jpg",
+    "sizes": ["35cm", "45cm", "65cm", "80cm"]
+  },
+  {
+    "category": "bst-kuromi---melody---cinnamoroll",
+    "name": "Thỏ Cinnamoroll Đeo Túi",
+    "price": "245.000",
+    "image": "img/products/kuromi2.jpg",
+    "sizes": ["35cm", "45cm", "65cm", "80cm"]
+  },
+  {
+    "category": "bst-kuromi---melody---cinnamoroll",
+    "name": "Thỏ Melody Cosplay Cá Mập",
+    "price": "135.000",
+    "image": "img/products/kuromi3.jpg",
+    "sizes": ["23cm", "35cm", "55cm", "65cm", "90cm"]
+  },
+  {
+    "category": "bst-kuromi---melody---cinnamoroll",
+    "name": "Thỏ Melody Đeo Túi",
+    "price": "245.000",
+    "image": "img/products/kuromi2.jpg",
+    "sizes": ["35cm", "45cm", "65cm", "80cm"]
+  }
+]

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán | Gấu Bông Online</title>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50 font-[Quicksand]">
+  <!-- Header -->
+  <div id="siteHeader"></div>
+
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 py-4 text-sm">
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 md:space-x-3">
+        <li class="inline-flex items-center">
+          <a href="/" class="inline-flex items-center text-gray-600 hover:text-pink-600">
+            <i class="fas fa-home mr-2"></i> Trang chủ
+          </a>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+            <a href="cart.html" class="text-gray-600 hover:text-pink-600">Giỏ hàng</a>
+          </div>
+        </li>
+        <li aria-current="page">
+          <div class="flex items-center">
+            <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+            <span class="text-pink-600">Thanh toán</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Thanh toán -->
+  <main class="container mx-auto px-4 py-10">
+    <h1 class="text-3xl font-bold text-pink-500 mb-8 text-center">Thanh toán đơn hàng</h1>
+
+    <div class="flex flex-col lg:flex-row gap-12">
+      <!-- Thông tin đơn hàng -->
+      <div class="lg:w-2/3 bg-white p-4 lg:p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Chi tiết đơn hàng</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-pink-100 text-pink-600">
+              <tr>
+                <th class="p-4">Sản phẩm</th>
+                <th class="p-4 text-center">Giá</th>
+                <th class="p-4 text-center">Số lượng</th>
+                <th class="p-4 text-center">Thành tiền</th>
+              </tr>
+            </thead>
+            <tbody id="order-body"></tbody>
+          </table>
+        </div>
+        <div class="mt-4 text-right">
+          <p class="text-lg font-semibold text-gray-700">Tổng cộng: <span id="order-total"
+              class="text-pink-500">0đ</span></p>
+        </div>
+      </div>
+
+      <!-- Form thông tin khách hàng -->
+      <div class="lg:w-1/3 bg-white p-4 lg:p-6 rounded-lg shadow-md lg:sticky lg:top-24">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Thông tin thanh toán</h2>
+        <form id="checkout-form" class="space-y-4">
+          <div>
+            <label for="name" class="block text-sm font-semibold text-gray-600">Họ và tên <span
+                class="text-red-500">*</span></label>
+            <div class="relative">
+              <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              <input type="text" id="name" required aria-label="Họ và tên khách hàng"
+                class="w-full mt-1 pl-10 p-2 border border-pink-200 rounded focus:outline-none focus:ring-2 focus:ring-pink-500" />
+              <p id="name-error" class="text-red-500 text-xs mt-1 hidden" role="alert">Vui lòng nhập họ và tên</p>
+            </div>
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-semibold text-gray-600">Số điện thoại <span
+                class="text-red-500">*</span></label>
+            <div class="relative">
+              <i class="fas fa-phone absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+              <input type="tel" id="phone" required aria-label="Số điện thoại khách hàng"
+                class="w-full mt-1 pl-10 p-2 border border-pink-200 rounded focus:outline-none focus:ring-2 focus:ring-pink-500" />
+              <p id="phone-error" class="text-red-500 text-xs mt-1 hidden" role="alert">Số điện thoại phải là 10 chữ số,
+                bắt đầu bằng 0</p>
+            </div>
+          </div>
+          <div>
+            <label for="address" class="block text-sm font-semibold text-gray-600">Địa chỉ giao hàng <span
+                class="text-red-500">*</span></label>
+            <div class="relative">
+              <i class="fas fa-map-marker-alt absolute left-3 top-4 text-gray-400"></i>
+              <textarea id="address" required aria-label="Địa chỉ giao hàng"
+                class="w-full mt-1 pl-10 p-2 border border-pink-200 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+              <p id="address-error" class="text-red-500 text-xs mt-1 hidden" role="alert">Vui lòng nhập địa chỉ</p>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-semibold text-gray-600">Phương thức thanh toán <span
+                class="text-red-500">*</span></label>
+            <div class="space-y-2 mt-1">
+              <label class="flex items-center">
+                <input type="radio" name="payment" value="cod" required class="text-pink-500 mr-2" />
+                <span>Thanh toán khi nhận hàng (COD)</span>
+              </label>
+              <label class="flex items-center">
+                <input type="radio" name="payment" value="bank" class="text-pink-500 mr-2" />
+                <span>Chuyển khoản ngân hàng</span>
+              </label>
+            </div>
+          </div>
+          <div>
+            <label for="note" class="block text-sm font-semibold text-gray-600">Ghi chú đơn hàng</label>
+            <textarea id="note" aria-label="Ghi chú đơn hàng"
+              class="w-full mt-1 p-2 border border-pink-200 rounded focus:outline-none focus:ring-2 focus:ring-pink-500"></textarea>
+          </div>
+          <div class="flex gap-4">
+            <a href="cart.html"
+              class="w-full bg-gray-200 text-gray-700 py-3 px-6 rounded-lg font-medium text-center hover:bg-gray-300">Quay
+              lại giỏ hàng</a>
+            <button type="submit" id="submit-btn"
+              class="w-full bg-pink-500 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center transition-transform transform hover:-translate-y-1">
+              <span id="submit-text">Xác nhận thanh toán</span>
+              <i id="loading-icon" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+            </button>
+          </div>
+        </form>
+        <div class="mt-6 text-sm text-gray-600">
+          <p><strong>Liên hệ:</strong></p>
+          <p>Email: support@gaubongonline.vn</p>
+          <p>Hotline: 0903 123 456</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal xác nhận đơn hàng -->
+  <div id="confirm-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full max-h-[80vh] overflow-y-auto">
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Xác nhận đơn hàng</h3>
+      <div id="modal-order-body" class="space-y-2"></div>
+      <p class="text-lg font-semibold text-gray-700 mt-4">Tổng cộng: <span id="modal-order-total"
+          class="text-pink-500">0đ</span></p>
+      <div class="mt-4">
+        <p><strong>Họ và tên:</strong> <span id="modal-name"></span></p>
+        <p><strong>Số điện thoại:</strong> <span id="modal-phone"></span></p>
+        <p><strong>Địa chỉ:</strong> <span id="modal-address"></span></p>
+        <p><strong>Phương thức thanh toán:</strong> <span id="modal-payment"></span></p>
+        <p><strong>Ghi chú:</strong> <span id="modal-note"></span></p>
+      </div>
+      <div class="mt-6 flex justify-end gap-4">
+        <button id="cancel-confirm"
+          class="bg-gray-200 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-300">Hủy</button>
+        <button id="confirm-order" class="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600">Xác
+          nhận</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal xác nhận thành công -->
+  <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center">
+      <i class="fas fa-check-circle text-4xl text-pink-500 mb-4"></i>
+      <h3 class="text-lg font-semibold text-gray-700 mb-4">Đặt hàng thành công!</h3>
+      <p class="text-gray-600 mb-6">🎉 Cảm ơn bạn đã mua sắm tại Gấu Bông Online! Đơn hàng của bạn đã được xác nhận.</p>
+      <a href="shop.html" class="bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600">Tiếp tục mua sắm</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="siteFooter"></div>
+
+  <script type="module">
+    import { loadPartials } from '../assets/js/main.js';
+    loadPartials();
+
+    const CART_STORAGE_KEY = 'shopping-cart';
+    const orderBody = document.getElementById('order-body');
+    const orderTotal = document.getElementById('order-total');
+    const checkoutForm = document.getElementById('checkout-form');
+    const confirmModal = document.getElementById('confirm-modal');
+    const successModal = document.getElementById('success-modal');
+    const modalOrderBody = document.getElementById('modal-order-body');
+    const modalOrderTotal = document.getElementById('modal-order-total');
+    const submitBtn = document.getElementById('submit-btn');
+    const submitText = document.getElementById('submit-text');
+    const loadingIcon = document.getElementById('loading-icon');
+
+    function renderOrder() {
+      // Ưu tiên lấy dữ liệu từ sessionStorage (từ trang cart.html chuyển qua)
+      let cart;
+      const checkoutItems = sessionStorage.getItem('checkout_items');
+      const checkoutType = sessionStorage.getItem('checkout_type');
+
+      if (checkoutItems) {
+        // Nếu có dữ liệu từ sessionStorage, sử dụng nó
+        cart = JSON.parse(checkoutItems);
+
+        // Đảm bảo giá sản phẩm là số nếu đang ở dạng chuỗi
+        cart = cart.map(item => {
+          // Xử lý giá là chuỗi hoặc số
+          let price = item.price;
+          if (typeof price === 'string') {
+            // Loại bỏ tất cả các ký tự không phải số
+            price = parseFloat(price.replace(/[^\d]/g, ''));
+          }
+
+          return {
+            ...item,
+            price: price
+          };
+        });
+      } else {
+        // Nếu không có, sử dụng toàn bộ giỏ hàng
+        cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+      }
+
+      orderBody.innerHTML = '';
+      let total = 0;
+
+      if (cart.length === 0) {
+        orderBody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-12">
+              <div class="flex flex-col items-center bg-white border border-pink-200 rounded-lg p-8 shadow-md animate-fade-in">
+                <i class="fas fa-shopping-cart text-5xl text-pink-500 mb-4"></i>
+                <p class="text-2xl font-bold text-gray-700 mb-4">Đơn hàng của bạn đang trống</p>
+                <a href="shop.html" class="bg-pink-500 text-white py-2 px-6 rounded-lg font-medium transition-transform transform hover:scale-105">Tiếp tục mua sắm</a>
+              </div>
+            </td>
+          </tr>`;
+        orderTotal.textContent = '0đ';
+        return;
+      }
+
+      cart.forEach(item => {
+        const quantity = item.quantity || 1;
+        const itemTotal = item.price * quantity;
+        total += itemTotal;
+
+        const row = document.createElement('tr');
+        row.className = 'border-b';
+        row.innerHTML = `
+          <td class="p-4 flex items-center gap-4">
+            <img src="${item.image}" class="w-20 h-20 object-cover rounded" loading="lazy">
+            <div>
+              <p class="font-semibold">${item.name}</p>
+              ${item.size ? `<p class="text-sm text-gray-500">Size: ${item.size}</p>` : ''}
+            </div>
+          </td>
+          <td class="text-center text-pink-500 font-semibold">${item.price.toLocaleString('vi-VN')}đ</td>
+          <td class="text-center">${quantity}</td>
+          <td class="text-center font-bold text-gray-700">${itemTotal.toLocaleString('vi-VN')}đ</td>
+        `;
+        orderBody.appendChild(row);
+      });
+
+      orderTotal.textContent = total.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function renderModalOrder(cart) {
+      modalOrderBody.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const quantity = item.quantity || 1;
+        // Đảm bảo giá là số
+        const price = typeof item.price === 'string' ? parseFloat(item.price.replace(/[^\d]/g, '')) : item.price;
+        const itemTotal = price * quantity;
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = 'flex justify-between';
+        div.innerHTML = `
+          <div>
+            <p class="font-medium">${item.name}</p>
+            ${item.size ? `<p class="text-sm text-gray-500">Size: ${item.size}</p>` : ''}
+            <p class="text-sm text-gray-500">Số lượng: ${quantity}</p>
+          </div>
+          <p class="font-semibold text-gray-700">${itemTotal.toLocaleString('vi-VN')}đ</p>
+        `;
+        modalOrderBody.appendChild(div);
+      });
+
+      modalOrderTotal.textContent = total.toLocaleString('vi-VN') + 'đ';
+    }
+
+    function validatePhone(phone) {
+      return /^0\d{9}$/.test(phone);
+    }
+
+    function showError(fieldId, errorId, message) {
+      const field = document.getElementById(fieldId);
+      const error = document.getElementById(errorId);
+      field.classList.add('border-red-500');
+      error.textContent = message;
+      error.classList.remove('hidden');
+    }
+
+    function clearErrors() {
+      ['name', 'phone', 'address'].forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        const error = document.getElementById(`${fieldId}-error`);
+        field.classList.remove('border-red-500');
+        error.classList.add('hidden');
+      });
+    }
+
+    checkoutForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      // Ưu tiên lấy dữ liệu từ sessionStorage
+      let cart;
+      const checkoutItems = sessionStorage.getItem('checkout_items');
+
+      if (checkoutItems) {
+        cart = JSON.parse(checkoutItems);
+      } else {
+        cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+      }
+
+      if (!cart.length) {
+        alert('Đơn hàng đang trống!');
+        return;
+      }
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const payment = document.querySelector('input[name="payment"]:checked')?.value;
+      const note = document.getElementById('note').value.trim();
+
+      let hasError = false;
+
+      if (!name) {
+        showError('name', 'name-error', 'Vui lòng nhập họ và tên');
+        hasError = true;
+      }
+      if (!phone || !validatePhone(phone)) {
+        showError('phone', 'phone-error', 'Số điện thoại phải là 10 chữ số, bắt đầu bằng 0');
+        hasError = true;
+      }
+      if (!address) {
+        showError('address', 'address-error', 'Vui lòng nhập địa chỉ');
+        hasError = true;
+      }
+      if (!payment) {
+        alert('Vui lòng chọn phương thức thanh toán');
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      submitText.textContent = 'Đang xử lý...';
+      loadingIcon.classList.remove('hidden');
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        renderModalOrder(cart);
+        document.getElementById('modal-name').textContent = name;
+        document.getElementById('modal-phone').textContent = phone;
+        document.getElementById('modal-address').textContent = address;
+        document.getElementById('modal-payment').textContent = payment === 'cod' ? 'Thanh toán khi nhận hàng' : 'Chuyển khoản ngân hàng';
+        document.getElementById('modal-note').textContent = note || 'Không có';
+        confirmModal.classList.remove('hidden');
+        submitText.textContent = 'Xác nhận thanh toán';
+        loadingIcon.classList.add('hidden');
+        submitBtn.disabled = false;
+      }, 500);
+    });
+
+    document.getElementById('cancel-confirm').addEventListener('click', () => {
+      confirmModal.classList.add('hidden');
+    });
+
+    document.getElementById('confirm-order').addEventListener('click', () => {
+      confirmModal.classList.add('hidden');
+
+      // Lấy loại thanh toán từ sessionStorage
+      const checkoutType = sessionStorage.getItem('checkout_type');
+
+      if (checkoutType === 'selected') {
+        // Nếu chỉ thanh toán mục đã chọn, lấy giỏ hàng hiện tại và loại bỏ các mục đã chọn
+        const selectedItems = JSON.parse(sessionStorage.getItem('checkout_items') || '[]');
+        const currentCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+
+        // Lọc giỏ hàng, loại bỏ các mục đã thanh toán
+        const updatedCart = currentCart.filter(item => {
+          // Kiểm tra xem item có trong selectedItems không
+          return !selectedItems.some(selected =>
+            selected.id === item.id && selected.size === item.size
+          );
+        });
+
+        // Cập nhật lại giỏ hàng
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedCart));
+      } else {
+        // Nếu thanh toán tất cả, xóa toàn bộ giỏ hàng
+        localStorage.removeItem(CART_STORAGE_KEY);
+      }
+
+      // Xóa dữ liệu thanh toán khỏi sessionStorage
+      sessionStorage.removeItem('checkout_items');
+      sessionStorage.removeItem('checkout_type');
+
+      renderOrder();
+      successModal.classList.remove('hidden');
+    });
+
+    document.getElementById('name').focus();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderOrder();
+    });
+  </script>
+</body>
+
+</html>
