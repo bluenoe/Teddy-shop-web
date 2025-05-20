@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giới thiệu - Gấu Bông Online</title>
+  <link rel="icon" href="data:," />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Quicksand", sans-serif;
+    }
+
+    .about-hero {
+      background-image: url("../img/banners/banner_About_Blur.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+    }
+
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Đảm bảo màu sắc auth-links đồng nhất */
+    .auth-links a,
+    .auth-links-mobile a,
+    .auth-links span,
+    .auth-links-mobile span {
+      color: #db2777 !important;
+      /* text-pink-600 */
+      font-weight: 600 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <!--     Header       -->
+  <div id="siteHeader"></div>
+
+  <!-- Hero Section -->
+  <section class="about-hero relative">
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center">
+      <div class="container mx-auto px-4 text-white text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Về chúng tôi</h1>
+        <p class="text-xl">Gấu Bông Online - Mang niềm vui đến mọi nhà</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center mb-16">
+        <h2 class="text-3xl font-bold mb-6">Câu chuyện của chúng tôi</h2>
+        <p class="text-gray-600 mb-6">
+          Gấu Bông Online được thành lập năm 2015 với sứ mệnh mang đến những
+          sản phẩm gấu bông chất lượng cao, an toàn cho trẻ em với giá cả hợp
+          lý. Chúng tôi tin rằng mỗi chú gấu bông không chỉ là món quà mà còn
+          là người bạn đồng hành của mọi gia đình.
+        </p>
+        <p class="text-gray-600">
+          Sau 8 năm hoạt động, chúng tôi tự hào là đơn vị cung cấp gấu bông uy
+          tín hàng đầu tại Việt Nam, với hơn 50.000 khách hàng tin tưởng và
+          hơn 100.000 sản phẩm đã được bán ra.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="bg-gray-50 p-8 rounded-lg text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-award text-pink-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Chất lượng hàng đầu</h3>
+          <p class="text-gray-600">
+            Sản phẩm nhập khẩu chính hãng, đạt tiêu chuẩn an toàn quốc tế
+          </p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-truck text-pink-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Giao hàng nhanh</h3>
+          <p class="text-gray-600">
+            Miễn phí vận chuyển toàn quốc cho đơn từ 500.000đ
+          </p>
+        </div>
+        <div class="bg-gray-50 p-8 rounded-lg text-center">
+          <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-headset text-pink-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Hỗ trợ 24/7</h3>
+          <p class="text-gray-600">
+            Đội ngũ CSKH luôn sẵn sàng giải đáp mọi thắc mắc
+          </p>
+        </div>
+      </div>
+
+      <div class="mb-16">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          Đội ngũ của chúng tôi
+        </h2>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="team-member text-center">
+            <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4">
+              <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg" alt="Nguyễn Thị Hồng"
+                class="w-full h-full object-cover transition duration-300" />
+            </div>
+            <h3 class="text-xl font-bold">Lê Huỳnh Phương Anh</h3>
+            <p class="text-gray-600">Founder & CEO</p>
+          </div>
+          <div class="team-member text-center">
+            <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4">
+              <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg" alt="Trần Văn Nam"
+                class="w-full h-full object-cover transition duration-300" />
+            </div>
+            <h3 class="text-xl font-bold">Trần Văn Nam</h3>
+            <p class="text-gray-600">Giám đốc kinh doanh</p>
+          </div>
+          <div class="team-member text-center">
+            <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4">
+              <img src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg" alt="Lê Thị Mai"
+                class="w-full h-full object-cover transition duration-300" />
+            </div>
+            <h3 class="text-xl font-bold">Lê Thị Mai</h3>
+            <p class="text-gray-600">Trưởng phòng thiết kế</p>
+          </div>
+          <div class="team-member text-center">
+            <div class="overflow-hidden rounded-full w-40 h-40 mx-auto mb-4">
+              <img src="https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg" alt="Phạm Văn Tú"
+                class="w-full h-full object-cover transition duration-300" />
+            </div>
+            <h3 class="text-xl font-bold">Huỳnh Dương Bảo Khánh</h3>
+            <p class="text-gray-600">Trưởng phòng CSKH</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="siteFooter"></div>
+
+  <script type="module">
+    import { loadPartials } from "../assets/js/main.js";
+    loadPartials();
+  </script>
+</body>
+
+</html>

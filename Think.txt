@@ -1,0 +1,41 @@
+1. Think: có nghĩa là khi tạo file css thì nó sẽ tác dụng lên toàn bộ project, hay là nhiều file css khác nhau rieng biệt???
+
+
+2.Kết luận dành cho web của bà:
+Ảnh banner/ảnh nền → dùng background-image trong CSS là đúng chuẩn ✨
+
+Ảnh sản phẩm/ảnh bài viết → dùng thẻ <img> trong HTML mới đúng logic SEO
+
+🎯 Kết luận nhanh cho bà:
+Mỗi ngôn ngữ có formatter tối ưu riêng
+
+Prettier là “trùm format web” (HTML, CSS, JS)
+
+Black là “ông kẹ Python” – siêu clean, auto strict
+
+Clang-format là “thần C++” – format rất kỷ luật
+
+
+
+
+Đang làm lở dở product details- products.json
+
+co nghia la dong nay <div id="bestSellerGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">  la tu dong responsive cho minh roi ha?
+ChatGPT đã nói:
+Đúng rồi bà ơi! ✅
+Dòng này chính là "bí thuật" Tailwind giúp chia layout tự động responsive mà không cần viết media query thủ công 🎯
+
+
+Giờ làm tiếp about.html 03/05/25
+
+
+!!! SỬA LẠI GIÁ BỊ LỖI đ đ
+
+
+!!!Kiêm tra lại js, data !!!!!!!
+
+
+REFACTOR WEB, CẤU TRÚC THƯ MỤC
+
+
+Sửa chinh sách bảo hành

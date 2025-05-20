@@ -1,0 +1,967 @@
+<!-- Fixed header.html with all issues resolved -->
+<header class="bg-white border-b border-pink-200">
+  <div class="container mx-auto flex justify-between items-center py-2 px-4">
+    <!-- Mobile header -->
+    <div class="md:hidden flex items-center justify-between w-full mobile-header-container">
+      <button id="hamburgerBtn" class="text-pink-500 text-2xl focus:outline-none hamburger-icon"
+        aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="javascript:void(0);"
+        onclick="window.location.href = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html'"
+        class="flex items-center justify-center hover:opacity-80 transition-opacity">
+        <img alt="Bemori logo" class="h-10 w-10" src="javascript:void(0);"
+          onerror="this.src = window.location.pathname.includes('/pages/') ? '../img/logos/original_03.png' : 'img/logos/original_03.png'" />
+        <span class="text-pink-500 font-bold text-xl ml-2">BEM</span>
+      </a>
+
+      <div class="flex items-center gap-2">
+        <!-- User section para móvil -->
+        <div id="userSectionMobile" class="relative hidden">
+          <button id="userMenuBtnMobile" class="flex items-center gap-1" aria-label="Menu người dùng"
+            aria-expanded="false">
+            <a href="javascript:void(0);"
+              onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'profile.html' : 'pages/profile.html'">
+              <img id="userAvatarMobile" src="javascript:void(0);"
+                onerror="this.src = window.location.pathname.includes('/pages/') ? '../img/avatars/bk_Ava.jpg' : 'img/avatars/bk_Ava.jpg'"
+                alt="User" class="w-8 h-8 rounded-full border-2 border-pink-400 object-cover">
+            </a>
+          </button>
+          <div id="userDropdownMobile"
+            class="absolute right-0 mt-2 w-48 bg-white border border-pink-200 rounded-lg shadow-lg hidden z-50"
+            role="menu" aria-labelledby="userMenuBtnMobile">
+            <div class="px-4 py-3 border-b border-pink-100">
+              <p class="text-sm font-semibold text-pink-600" id="userNameMobile">User</p>
+              <p class="text-xs text-gray-500">Khách hàng</p>
+            </div>
+            <a href="javascript:void(0);"
+              onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'profile.html' : 'pages/profile.html'"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+                class="fas fa-user mr-2 text-pink-400"></i>Tài khoản</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+                class="fas fa-box mr-2 text-pink-400"></i>Đơn hàng</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+                class="fas fa-heart mr-2 text-pink-400"></i>Yêu thích</a>
+            <a href="#" id="logoutBtnMobile"
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 border-t border-pink-100" role="menuitem"><i
+                class="fas fa-sign-out-alt mr-2 text-pink-400"></i>Đăng xuất</a>
+          </div>
+        </div>
+        <!-- Enlaces de autenticación para móvil -->
+        <div class="auth-links-mobile flex items-center gap-2">
+          <a href="javascript:void(0);"
+            onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'register.html' : 'pages/register.html'"
+            class="text-pink-600 font-semibold text-sm hover:underline">Đăng ký</a>
+          <span class="text-pink-600">|</span>
+          <a href="javascript:void(0);"
+            onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'login.html' : 'pages/login.html'"
+            class="text-pink-600 font-semibold text-sm hover:underline">Đăng nhập</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop header -->
+    <div class="hidden md:flex items-center">
+      <a href="javascript:void(0);"
+        onclick="window.location.href = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html'"
+        class="flex items-center hover:opacity-80 transition-opacity">
+        <img alt="Bemori logo" class="h-10 w-10" src="javascript:void(0);"
+          onerror="this.src = window.location.pathname.includes('/pages/') ? '../img/logos/original_03.png' : 'img/logos/original_03.png'" />
+        <span class="text-pink-500 font-bold text-xl ml-2">BEMORI</span>
+      </a>
+    </div>
+    <div class="hidden md:flex items-center search-container">
+      <input class="border border-pink-300 rounded-l-full py-2 px-4 w-64" placeholder="Nhập sản phẩm cần tìm"
+        type="text" aria-label="Tìm kiếm sản phẩm" />
+      <button class="bg-pink-500 text-white rounded-r-full py-2 px-4" aria-label="Tìm kiếm">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div class="hidden md:flex items-center gap-4">
+      <div class="flex items-center">
+        <i class="fas fa-phone-alt text-pink-500"></i>
+        <span class="text-pink-500 font-bold text-lg ml-2">097.989.6616</span>
+      </div>
+      <!-- Giỏ hàng -->
+      <div class="relative">
+        <button id="cartBtn" class="text-pink-500 hover:text-pink-700"
+          onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'cart.html' : 'pages/cart.html'"
+          aria-label="Giỏ hàng">
+          <i class="fas fa-shopping-cart text-xl"></i>
+          <span id="cartCount"
+            class="absolute -top-2 -right-2 bg-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+        </button>
+      </div>
+      <!-- User section -->
+      <div id="userSection" class="relative hidden">
+        <button id="userMenuBtn" class="flex items-center gap-1" aria-label="Menu người dùng" aria-expanded="false">
+          <a href="javascript:void(0);"
+            onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'profile.html' : 'pages/profile.html'">
+            <img id="userAvatar" src="javascript:void(0);"
+              onerror="this.src = window.location.pathname.includes('/pages/') ? '../img/avatars/bk_Ava.jpg' : 'img/avatars/bk_Ava.jpg'"
+              alt="User" class="w-8 h-8 rounded-full border-2 border-pink-400 object-cover">
+          </a>
+        </button>
+        <div id="userDropdown"
+          class="absolute right-0 mt-2 w-48 bg-white border border-pink-200 rounded-lg shadow-lg hidden z-50"
+          role="menu" aria-labelledby="userMenuBtn">
+          <div class="px-4 py-3 border-b border-pink-100">
+            <p class="text-sm font-semibold text-pink-600" id="userName">User</p>
+            <p class="text-xs text-gray-500">Khách hàng</p>
+          </div>
+          <a href="javascript:void(0);"
+            onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'profile.html' : 'pages/profile.html'"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+              class="fas fa-user mr-2 text-pink-400"></i>Tài khoản</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+              class="fas fa-box mr-2 text-pink-400"></i>Đơn hàng</a>
+          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50" role="menuitem"><i
+              class="fas fa-heart mr-2 text-pink-400"></i>Yêu thích</a>
+          <a href="#" id="logoutBtn"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-50 border-t border-pink-100" role="menuitem"><i
+              class="fas fa-sign-out-alt mr-2 text-pink-400"></i>Đăng xuất</a>
+        </div>
+      </div>
+      <div class="auth-links flex items-center gap-2 ml-2 md:items-end md:ml-0">
+        <a href="javascript:void(0);"
+          onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'register.html' : 'pages/register.html'"
+          class="text-pink-600 font-semibold text-sm hover:underline">Đăng ký</a>
+        <span class="text-pink-600">|</span>
+        <a href="javascript:void(0);"
+          onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'login.html' : 'pages/login.html'"
+          class="text-pink-600 font-semibold text-sm hover:underline">Đăng nhập</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile search bar -->
+<div class="md:hidden bg-white border-b border-pink-200 py-2 px-4">
+  <div class="flex items-center search-container">
+    <input class="border border-pink-300 rounded-l-full py-2 px-4 flex-grow" placeholder="Nhập sản phẩm cần tìm"
+      type="text" aria-label="Tìm kiếm sản phẩm" />
+    <button class="bg-pink-500 text-white rounded-r-full py-2 px-4" aria-label="Tìm kiếm">
+      <i class="fas fa-search"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile phone number -->
+<div class="md:hidden bg-white flex justify-center items-center py-2">
+  <a href="tel:0979896616" class="flex items-center text-pink-500">
+    <i class="fas fa-phone-alt mr-2"></i>
+    <span class="font-bold">097.989.6616</span>
+  </a>
+</div>
+
+<nav role="navigation" aria-label="Main navigation" style="background-color: #fdafbc;" class="shadow-md">
+  <div class="container mx-auto flex items-center justify-center py-2 px-4 gap-2 relative">
+    <!-- Navigation links -->
+    <div id="navMenu"
+      class="hidden md:flex items-center justify-center gap-2 flex-col md:flex-row absolute md:static top-0 left-0 w-full md:w-auto bg-pink-200 md:bg-transparent z-50">
+      <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center"
+        href="javascript:void(0);"
+        onclick="window.location.href = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html'">TRANG
+        CHỦ</a>
+
+      <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center"
+        href="javascript:void(0);"
+        onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'best-sellers.html' : 'pages/best-sellers.html'">BEST
+        SELLER</a>
+
+      <div class="relative group w-full md:w-auto dropdown-wrapper">
+        <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center flex justify-between items-center w-full"
+          href="#" aria-haspopup="true">
+          <span>GẤU TEDDY</span>
+          <i class="fas fa-chevron-down ml-1 md:hidden"></i>
+        </a>
+        <div
+          class="absolute hidden group-hover:block md:group-hover:opacity-100 md:group-hover:visible opacity-0 invisible transition-all duration-300 bg-white text-pink-500 mt-1 rounded-lg shadow-lg z-10 dropdown-menu"
+          role="menu" aria-labelledby="collectionMenu">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 p-4">
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">GẤU BÔNG THEO KÍCH THƯỚC</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Gấu Teddy 1m5-1m6-1m7-2m</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Teddy 80cm-1m-1m1-1m2-1m4</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Teddy Nhỏ 20cm-70cm</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Teddy Khổng Lồ 2m-3m</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Teddy Mini</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">GẤU BÔNG THEO GIÁ</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Dưới 100K</a></li>
+                <li><a href="#" class="hover:underline block py-1">200K-500K</a></li>
+                <li><a href="#" class="hover:underline block py-1">500K-1tr</a></li>
+                <li><a href="#" class="hover:underline block py-1">1tr-2tr</a></li>
+                <li><a href="#" class="hover:underline block py-1">Trên 2tr</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">GẤU BÔNG CAO CẤP</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Gấu Bông Teddy Socola</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Bông Teddy Logo Baby</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Bông Teddy Cosco</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Bông Teddy Boy</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Bông Nhập Khẩu</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">GẤU BÔNG THEO DỊP</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Gấu Valentine</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Sinh Nhật</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Tốt Nghiệp</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Noel</a></li>
+                <li><a href="#" class="hover:underline block py-1">Gấu Tết</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative group w-full md:w-auto dropdown-wrapper">
+        <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center flex justify-between items-center w-full"
+          href="#" aria-haspopup="true">
+          <span>BỘ SƯU TẬP</span>
+          <i class="fas fa-chevron-down ml-1 md:hidden"></i>
+        </a>
+        <div
+          class="absolute hidden group-hover:block md:group-hover:opacity-100 md:group-hover:visible opacity-0 invisible transition-all duration-300 bg-white text-pink-500 mt-1 rounded-lg shadow-lg z-10 dropdown-menu"
+          role="menu" aria-labelledby="collectionMenu">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">TOP BÁN CHẠY</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline">Top 10 sản phẩm bán chạy</a></li>
+                <li><a href="#" class="hover:underline">Gấu bông được yêu thích</a></li>
+                <li><a href="#" class="hover:underline">Sản phẩm mới về</a></li>
+                <li><a href="#" class="hover:underline">Sản phẩm giảm giá</a></li>
+                <li><a href="#" class="hover:underline">Combo ưu đãi</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">THEO MÙA</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline">Mùa hè</a></li>
+                <li><a href="#" class="hover:underline">Mùa đông</a></li>
+                <li><a href="#" class="hover:underline">Mùa tựu trường</a></li>
+                <li><a href="#" class="hover:underline">Mùa lễ hội</a></li>
+                <li><a href="#" class="hover:underline">Mùa Valentine</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">THEO ĐỐI TƯỢNG</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline">Cho bé gái</a></li>
+                <li><a href="#" class="hover:underline">Cho bé trai</a></li>
+                <li><a href="#" class="hover:underline">Cho người yêu</a></li>
+                <li><a href="#" class="hover:underline">Cho bạn bè</a></li>
+                <li><a href="#" class="hover:underline">Cho gia đình</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">SẢN PHẨM ĐẶC BIỆT</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline">Gấu bông phát nhạc</a></li>
+                <li><a href="#" class="hover:underline">Gấu bông có hộp quà</a></li>
+                <li><a href="#" class="hover:underline">Gấu bông kèm thiệp</a></li>
+                <li><a href="#" class="hover:underline">Gấu bông handmade</a></li>
+                <li><a href="#" class="hover:underline">Gấu bông độc quyền</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative group w-full md:w-auto dropdown-wrapper">
+        <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center flex justify-between items-center w-full"
+          href="#" aria-haspopup="true">
+          <span>GÓC CỦA GẤU</span>
+          <i class="fas fa-chevron-down ml-1 md:hidden"></i>
+        </a>
+        <div
+          class="absolute hidden group-hover:block md:group-hover:opacity-100 md:group-hover:visible opacity-0 invisible transition-all duration-300 bg-white text-pink-500 mt-1 rounded-lg shadow-lg z-10 dropdown-menu"
+          role="menu" aria-labelledby="collectionMenu">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">THÔNG TIN</h3>
+              <ul class="text-sm">
+                <li><a href="javascript:void(0);"
+                    onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'about.html' : 'pages/about.html'"
+                    class="hover:underline block py-1">Về chúng tôi</a></li>
+                <li><a href="javascript:void(0);"
+                    onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'contact.html' : 'pages/contact.html'"
+                    class="hover:underline block py-1">Liên hệ</a></li>
+                <li><a href="#" class="hover:underline block py-1">Hệ thống cửa hàng</a></li>
+                <li><a href="#" class="hover:underline block py-1">Tuyển dụng</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">HỖ TRỢ KHÁCH HÀNG</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Hướng dẫn mua hàng</a></li>
+                <li><a href="#" class="hover:underline block py-1">Chính sách bảo hành</a></li>
+                <li><a href="#" class="hover:underline block py-1">Chính sách đổi trả</a></li>
+                <li><a href="#" class="hover:underline block py-1">Câu hỏi thường gặp</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold text-pink-600 mb-2">CỘNG ĐỒNG</h3>
+              <ul class="text-sm">
+                <li><a href="#" class="hover:underline block py-1">Blog chia sẻ</a></li>
+                <li><a href="#" class="hover:underline block py-1">Hình ảnh khách hàng</a></li>
+                <li><a href="#" class="hover:underline block py-1">Chương trình khuyến mãi</a></li>
+                <li><a href="#" class="hover:underline block py-1">Đánh giá sản phẩm</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a class="text-white font-semibold text-sm mx-2 py-2 md:py-0 md:h-full md:flex md:items-center"
+        href="javascript:void(0);"
+        onclick="window.location.href = window.location.pathname.includes('/pages/') ? 'shop.html' : 'pages/shop.html'">TẤT
+        CẢ SP</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Load only necessary Font Awesome icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/regular.min.css">
+
+<style>
+  @media (min-width: 768px) {
+    #hamburgerBtn {
+      display: none;
+    }
+
+    #navMenu {
+      display: flex !important;
+      height: 40px;
+      /* Chỉ định chiều cao cố định cho menu */
+    }
+
+    /* Đảm bảo tất cả menu item có cùng độ cao */
+    #navMenu>a,
+    #navMenu>div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Menu items không có dropdown */
+    #navMenu>a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* Dropdown containers */
+    #navMenu .dropdown-wrapper {
+      height: 100%;
+    }
+
+    /* Dropdown links */
+    #navMenu .dropdown-wrapper>a {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Dropdown menus */
+    .dropdown-menu {
+      top: 40px;
+      /* Khớp với chiều cao của menu */
+    }
+  }
+
+  @media (max-width: 767px) {
+    #navMenu {
+      max-height: 100vh;
+      overflow-y: auto;
+      top: 0;
+      padding-top: 1rem;
+      transition: all 0.3s ease-in-out;
+      position: fixed;
+      background-color: #fdafbc !important;
+      z-index: 1000;
+    }
+
+    #navMenu::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    #navMenu::-webkit-scrollbar-thumb {
+      background-color: #fdafbc;
+      border-radius: 10px;
+    }
+
+    #navMenu a {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+      padding: 0.75rem 1rem;
+    }
+
+    #navMenu a:last-child {
+      border-bottom: none;
+    }
+
+    /* Mobile dropdown fixes */
+    .dropdown-menu {
+      position: static !important;
+      width: 100% !important;
+      left: 0 !important;
+      transform: none !important;
+      max-height: none !important;
+      overflow-y: visible !important;
+      margin: 0 !important;
+      padding: 0 1rem !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  /* User avatar styling */
+  #userAvatar,
+  #userAvatarMobile {
+    transition: all 0.3s ease;
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    border: 2px solid rgba(253, 175, 188, 0.8);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+  }
+
+  #userMenuBtn:hover #userAvatar,
+  #userMenuBtnMobile:hover #userAvatarMobile {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 2px rgba(253, 175, 188, 0.5);
+  }
+
+  /* Dropdown positioning */
+  #userDropdown,
+  #userDropdownMobile {
+    right: 0;
+    top: calc(100% + 0.5rem);
+    z-index: 100;
+    min-width: 12rem;
+    transition: all 0.2s ease;
+  }
+
+  /* Mobile user dropdown adjustments */
+  @media (max-width: 767px) {
+    #userDropdownMobile {
+      right: -1rem;
+    }
+  }
+
+  /* Mobile menu styles */
+  @media (max-width: 767px) {
+    .group {
+      width: 100%;
+    }
+
+    .group>a {
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      width: 100%;
+    }
+
+    /* Accordion style for mobile menus */
+    .group .dropdown-menu {
+      display: none;
+    }
+
+    .group.active .dropdown-menu {
+      display: block;
+    }
+  }
+
+  /* Dropdown menu improvements */
+  .dropdown-menu {
+    width: min(800px, 90vw);
+    max-width: 90vw;
+    transition: all 0.2s ease-out;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  /* Center dropdown menu */
+  .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Grid layout improvements */
+  .dropdown-menu .grid {
+    gap: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  .dropdown-menu h3 {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    color: #db2777;
+    font-weight: 600;
+  }
+
+  .dropdown-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dropdown-menu li a {
+    display: block;
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+    color: #4b5563;
+    transition: all 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dropdown-menu li a:hover {
+    color: #db2777;
+    transform: translateX(4px);
+  }
+
+  /* Close button for mobile menu */
+  .close-menu {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: white;
+    font-size: 1.5rem;
+    z-index: 10;
+    padding: 0.5rem;
+  }
+
+  /* Mobile menu overlay */
+  .menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+
+  .menu-overlay.active {
+    display: block;
+  }
+
+  /* Hamburger menu styles */
+  .hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .hamburger-icon span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #db2777;
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .hamburger-icon[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .hamburger-icon[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-icon[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mobile menu styles */
+  @media (max-width: 1023px) {
+    #navMenu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      max-width: 300px;
+      height: 100vh;
+      background-color: #fdafbc;
+      padding: 60px 20px 20px;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+      overflow-y: auto;
+    }
+
+    #navMenu.active {
+      left: 0;
+    }
+
+    #navMenu a {
+      display: block;
+      padding: 12px 0;
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dropdown-menu {
+      position: static !important;
+      width: 100% !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      margin: 0 !important;
+      padding: 10px !important;
+      box-shadow: none !important;
+    }
+
+    .dropdown-menu .grid {
+      grid-template-columns: 1fr !important;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  /* Tablet specific styles */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .search-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    #navMenu {
+      width: 60%;
+      max-width: 400px;
+    }
+  }
+
+  /* Mobile specific styles */
+  @media (max-width: 767px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .search-container {
+      width: 100%;
+    }
+
+    .mobile-header-container {
+      padding: 10px 0;
+    }
+
+    #navMenu {
+      width: 85%;
+      max-width: 280px;
+    }
+  }
+</style>
+
+<script>
+  // Initialize header events - can be called after dynamic loading
+  function initHeaderEvents() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    const userMenuBtn = document.getElementById('userMenuBtn');
+    const userDropdown = document.getElementById('userDropdown');
+    const userMenuBtnMobile = document.getElementById('userMenuBtnMobile');
+    const userDropdownMobile = document.getElementById('userDropdownMobile');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    // Create a close button for mobile menu
+    if (navMenu && !document.querySelector('.close-menu')) {
+      const closeButton = document.createElement('button');
+      closeButton.className = 'close-menu';
+      closeButton.innerHTML = '<i class="fas fa-times"></i>';
+      closeButton.setAttribute('aria-label', 'Close menu');
+      navMenu.prepend(closeButton);
+
+      closeButton.addEventListener('click', () => {
+        navMenu.classList.add('hidden');
+        document.querySelector('.menu-overlay')?.classList.remove('active');
+      });
+    }
+
+    // Create overlay for mobile menu
+    if (!document.querySelector('.menu-overlay')) {
+      const overlay = document.createElement('div');
+      overlay.className = 'menu-overlay';
+      document.body.appendChild(overlay);
+
+      overlay.addEventListener('click', () => {
+        navMenu.classList.add('hidden');
+        overlay.classList.remove('active');
+      });
+    }
+
+    // Hamburger menu toggle
+    if (hamburgerBtn && navMenu) {
+      hamburgerBtn.addEventListener('click', () => {
+        const isExpanded = hamburgerBtn.getAttribute('aria-expanded') === 'true';
+        hamburgerBtn.setAttribute('aria-expanded', !isExpanded);
+        navMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
+      });
+    }
+
+    // Close menu when clicking overlay
+    if (menuOverlay) {
+      menuOverlay.addEventListener('click', () => {
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (navMenu && navMenu.classList.contains('active') &&
+        !navMenu.contains(e.target) &&
+        !hamburgerBtn.contains(e.target)) {
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (window.innerWidth > 1023) {
+          hamburgerBtn.setAttribute('aria-expanded', 'false');
+          navMenu.classList.remove('active');
+          menuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }, 250);
+    });
+
+    // User dropdown toggle - Desktop
+    if (userMenuBtn && userDropdown) {
+      userMenuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = userMenuBtn.getAttribute('aria-expanded') === 'true';
+        userMenuBtn.setAttribute('aria-expanded', !isExpanded);
+        userDropdown.classList.toggle('hidden');
+      });
+    }
+
+    // User dropdown toggle - Mobile
+    if (userMenuBtnMobile && userDropdownMobile) {
+      userMenuBtnMobile.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isExpanded = userMenuBtnMobile.getAttribute('aria-expanded') === 'true';
+        userMenuBtnMobile.setAttribute('aria-expanded', !isExpanded);
+        userDropdownMobile.classList.toggle('hidden');
+      });
+    }
+
+    // Cerrar dropdowns al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      if (userDropdown && !userDropdown.contains(e.target) && !userMenuBtn.contains(e.target)) {
+        userDropdown.classList.add('hidden');
+        userMenuBtn.setAttribute('aria-expanded', 'false');
+      }
+
+      if (userDropdownMobile && !userDropdownMobile.contains(e.target) && !userMenuBtnMobile.contains(e.target)) {
+        userDropdownMobile.classList.add('hidden');
+        userMenuBtnMobile.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Configurar función de logout
+    const setupLogout = (logoutBtn) => {
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          localStorage.removeItem('teddy_token');
+          localStorage.removeItem('teddy_user');
+          window.location.href = '../index.html';
+        });
+      }
+    };
+
+    // Setup logout for both desktop and mobile
+    setupLogout(document.getElementById('logoutBtn'));
+    setupLogout(document.getElementById('logoutBtnMobile'));
+
+    // Mobile accordion menu
+    if (window.innerWidth < 768) {
+      const groups = document.querySelectorAll('.group');
+      groups.forEach(group => {
+        const link = group.querySelector('a');
+        const dropdown = group.querySelector('.dropdown-menu');
+
+        if (link && dropdown) {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            group.classList.toggle('active');
+
+            // Toggle icon
+            const icon = link.querySelector('i.fa-chevron-down');
+            if (icon) {
+              icon.classList.toggle('fa-chevron-down');
+              icon.classList.toggle('fa-chevron-up');
+            }
+          });
+        }
+      });
+    }
+
+    // Call initial checks
+    checkLoginStatus();
+    updateCartCount();
+  }
+
+  // Cập nhật số lượng giỏ hàng từ localStorage
+  function updateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    if (!cartCount) return;
+
+    let count = 0;
+    try {
+      const cartItems = JSON.parse(localStorage.getItem('shopping-cart') || '[]');
+      count = cartItems.reduce((total, item) => total + (item.quantity || 0), 0);
+    } catch (error) {
+      console.error('Error parsing cart data:', error);
+    }
+
+    if (count > 0) {
+      cartCount.textContent = count;
+      cartCount.classList.remove('hidden');
+    } else {
+      cartCount.classList.add('hidden');
+    }
+  }
+
+  // Kiểm tra trạng thái đăng nhập từ localStorage
+  function checkLoginStatus() {
+    const userSection = document.getElementById('userSection');
+    const userSectionMobile = document.getElementById('userSectionMobile');
+    const authLinks = document.querySelectorAll('.auth-links');
+    const authLinksMobile = document.querySelectorAll('.auth-links-mobile');
+    const userName = document.getElementById('userName');
+    const userNameMobile = document.getElementById('userNameMobile');
+    const userAvatar = document.getElementById('userAvatar');
+    const userAvatarMobile = document.getElementById('userAvatarMobile');
+
+    if (!userSection || !userSectionMobile) return;
+
+    const user = JSON.parse(localStorage.getItem('teddy_user'));
+    const isLoggedIn = !!user;
+
+    if (isLoggedIn) {
+      // Mostrar secciones de usuario
+      userSection.classList.remove('hidden');
+      userSectionMobile.classList.remove('hidden');
+
+      // Ocultar enlaces de autenticación
+      authLinks.forEach(link => link.classList.add('hidden'));
+      authLinksMobile.forEach(link => link.classList.add('hidden'));
+
+      // Set user info en desktop
+      if (userName) {
+        userName.textContent = user.name || 'Khách hàng';
+      }
+
+      if (userAvatar) {
+        // Chuẩn bị ảnh trước khi gán để tránh hiển thị lỗi
+        const img = new Image();
+        img.onload = function () {
+          userAvatar.src = img.src;
+        };
+        img.onerror = function () {
+          userAvatar.src = 'https://via.placeholder.com/40/fdafbc/ffffff?text=User';
+        };
+        img.src = user.avatar || 'https://via.placeholder.com/40/fdafbc/ffffff?text=User';
+      }
+
+      // Set user info en mobile
+      if (userNameMobile) {
+        userNameMobile.textContent = user.name || 'Khách hàng';
+      }
+
+      if (userAvatarMobile) {
+        // Chuẩn bị ảnh trước khi gán để tránh hiển thị lỗi
+        const imgMobile = new Image();
+        imgMobile.onload = function () {
+          userAvatarMobile.src = imgMobile.src;
+        };
+        imgMobile.onerror = function () {
+          userAvatarMobile.src = 'https://via.placeholder.com/40/fdafbc/ffffff?text=User';
+        };
+        imgMobile.src = user.avatar || 'https://via.placeholder.com/40/fdafbc/ffffff?text=User';
+      }
+    } else {
+      // Ocultar secciones de usuario
+      userSection.classList.add('hidden');
+      userSectionMobile.classList.add('hidden');
+
+      // Mostrar enlaces de autenticación
+      authLinks.forEach(link => link.classList.remove('hidden'));
+      authLinksMobile.forEach(link => link.classList.remove('hidden'));
+    }
+  }
+
+  // Initialize events when the document is fully loaded
+  document.addEventListener('DOMContentLoaded', initHeaderEvents);
+
+  // Export functions for external use
+  if (typeof window !== 'undefined') {
+    window.bemoriHeader = {
+      initHeaderEvents,
+      updateCartCount,
+      checkLoginStatus
+    };
+  }
+</script>

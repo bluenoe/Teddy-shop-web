@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập - Gấu Bông Online</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --teddy-primary: #f472b6;
+      --teddy-primary-dark: #db2777;
+      --teddy-secondary: #fdf2f8;
+      --teddy-accent: #fbcfe8;
+      --teddy-text: #4b5563;
+      --teddy-bg: #fff5f7;
+    }
+
+    /* Mobile-first base styles */
+    body {
+      background-image: url('../assets/img/banners/background_logreg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      color: var(--teddy-text);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Label Input Fields */
+    .input-container {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .input-container label {
+      position: absolute;
+      top: 0;
+      left: 3rem;
+      padding: 1.25rem 0;
+      pointer-events: none;
+      transition: 0.3s ease all;
+      color: #9ca3af;
+      font-size: 1rem;
+      z-index: 2;
+    }
+
+    .input-container .input-icon {
+      position: absolute;
+      top: 1.25rem;
+      left: 1.25rem;
+      color: var(--teddy-primary);
+      transition: 0.3s ease all;
+      z-index: 3;
+    }
+
+    .input-container input {
+      padding: 1.25rem 1.25rem 1.25rem 3rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--teddy-accent);
+      background-color: white;
+      width: 100%;
+      font-size: 1rem;
+      transition: 0.3s ease all;
+      position: relative;
+      z-index: 1;
+    }
+
+    .input-container input:focus {
+      outline: none;
+      border-color: var(--teddy-primary);
+      box-shadow: 0 10px 25px -5px rgba(244, 114, 182, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .input-container input:focus+label,
+    .input-container input:not(:placeholder-shown)+label {
+      top: -0.75rem;
+      left: 0.75rem;
+      font-size: 0.75rem;
+      padding: 0 0.5rem;
+      background-color: white;
+      color: var(--teddy-primary);
+      font-weight: 600;
+      z-index: 4;
+    }
+
+    .input-container input:focus~.input-icon {
+      color: var(--teddy-primary-dark);
+    }
+
+    /* Password input with toggle */
+    .input-container.password-container input {
+      padding-right: 3.5rem;
+    }
+
+    .pwd-toggle-btn {
+      position: absolute;
+      right: 1.25rem;
+      top: 1.25rem;
+      color: var(--teddy-text);
+      background: none;
+      border: none;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    /* Social login buttons */
+    .social-btn {
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      padding: 1rem;
+      border: 1px solid var(--teddy-accent);
+      font-size: 0.9rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      min-height: 50px;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .social-btn i {
+      font-size: 1.25rem;
+    }
+
+    .social-btn.facebook {
+      background-color: #1877F2;
+      color: white;
+      border-color: #1877F2;
+    }
+
+    .social-btn.facebook:hover {
+      background-color: #0d6efd;
+    }
+
+    .social-btn.google {
+      background-color: white;
+      color: #333;
+      border-color: #e5e7eb;
+    }
+
+    .social-btn.google:hover {
+      background-color: #f9fafb;
+    }
+
+    .social-btn.apple {
+      background-color: black;
+      color: white;
+      border-color: black;
+    }
+
+    .social-btn.apple:hover {
+      background-color: #333;
+    }
+
+    /* Button ripple effect */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    /* Login section and card - Mobile first */
+    section.login-section {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 0;
+    }
+
+    .login-card {
+      animation: fadeIn 0.6s ease-out;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      overflow: hidden;
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      box-shadow: none;
+      border: none;
+    }
+
+    .header-gradient {
+      background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 1.5rem;
+    }
+
+    .header-gradient::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    form#loginForm {
+      padding: 1.5rem;
+    }
+
+    /* Submit button - not too wide on mobile */
+    button[type="submit"] {
+      max-width: 100%;
+      height: 50px;
+    }
+
+    /* Divider with text */
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--teddy-accent);
+    }
+
+    .divider::before {
+      margin-right: 0.5rem;
+    }
+
+    .divider::after {
+      margin-left: 0.5rem;
+    }
+
+    /* Decorative elements - reduced opacity on mobile */
+    .teddy-decor {
+      position: absolute;
+      z-index: -1;
+      opacity: 0.2;
+      filter: blur(60px);
+    }
+
+    .teddy-decor-1 {
+      top: -10%;
+      left: -10%;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, #ffd6e7 0%, #ffb6c1 100%);
+      border-radius: 50%;
+    }
+
+    .teddy-decor-2 {
+      bottom: -10%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(135deg, #d6e4ff 0%, #b6c1ff 100%);
+      border-radius: 50%;
+    }
+
+    .teddy-decor-3 {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, #f0e6ff 0%, #e6d6ff 100%);
+      border-radius: 50%;
+      opacity: 0.15;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tablet styles (576px-991px) */
+    @media (min-width: 576px) {
+      body {
+        padding: 1rem;
+      }
+
+      section.login-section {
+        max-width: 500px;
+        height: auto;
+        padding: 1rem;
+      }
+
+      .login-card {
+        max-width: 500px;
+        height: auto;
+        border-radius: 1rem;
+        box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+      }
+
+      .header-gradient {
+        padding: 2rem;
+      }
+
+      form#loginForm {
+        padding: 2rem;
+      }
+
+      .teddy-decor {
+        opacity: 0.3;
+      }
+    }
+
+    /* Desktop styles (≥992px) */
+    @media (min-width: 992px) {
+      section.login-section {
+        max-width: 420px;
+      }
+
+      .login-card {
+        border-radius: 1.25rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+      }
+
+      .input-container label {
+        padding: 1.15rem 0;
+        font-size: 0.95rem;
+      }
+
+      .input-container .input-icon {
+        top: 1.15rem;
+      }
+
+      .input-container input {
+        padding: 1.15rem 1.25rem 1.15rem 3rem;
+        font-size: 0.95rem;
+      }
+
+      .pwd-toggle-btn {
+        top: 1.15rem;
+      }
+
+      .teddy-decor {
+        opacity: 0.4;
+      }
+    }
+
+    /* Added device-specific classes for extra styling */
+    .mobile-view button[type="submit"] {
+      height: 56px;
+    }
+
+    .mobile-view .input-container input {
+      height: 56px;
+    }
+
+    .mobile-view .social-btn {
+      min-height: 56px;
+    }
+
+    .is-touch-device button:active,
+    .is-touch-device a:active {
+      opacity: 0.7;
+      transform: scale(0.98);
+    }
+
+    /* Better handling of scrolling on mobile */
+    .mobile-view {
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Improved form styling on tablet */
+    .tablet-view .login-card {
+      max-width: 90%;
+    }
+
+    /* Common form container styles for both login and register */
+    .auth-form-container {
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Large desktop size adjustments */
+    @media (min-width: 1440px) {
+
+      section.login-section,
+      section.register-section {
+        max-width: 420px;
+      }
+
+      .login-card,
+      .register-card {
+        box-shadow: 0 25px 30px -5px rgba(0, 0, 0, 0.07), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      form#loginForm,
+      form#registerForm {
+        padding: 2.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="font-[Quicksand]">
+  <!-- Decorative elements -->
+  <div class="teddy-decor teddy-decor-1"></div>
+  <div class="teddy-decor teddy-decor-2"></div>
+  <div class="teddy-decor teddy-decor-3"></div>
+
+  <!-- Login Form Section -->
+  <section class="login-section auth-form-container">
+    <div class="login-card">
+      <div class="header-gradient py-8 px-8">
+        <h2 class="text-white text-2xl font-bold relative z-10">Chào mừng trở lại!</h2>
+        <p class="text-pink-100 text-sm mt-1 relative z-10">Đăng nhập để tiếp tục mua sắm</p>
+      </div>
+
+      <form id="loginForm" class="p-8">
+        <div class="input-container">
+          <input type="email" id="email" name="email" placeholder=" " required />
+          <label for="email">Email hoặc tên đăng nhập</label>
+          <i class="fas fa-envelope input-icon"></i>
+        </div>
+
+        <div class="input-container password-container">
+          <input type="password" id="password" name="password" placeholder=" " required />
+          <label for="password">Mật khẩu</label>
+          <i class="fas fa-lock input-icon"></i>
+          <button type="button" id="togglePassword" class="pwd-toggle-btn focus:outline-none">
+            <i class="far fa-eye"></i>
+          </button>
+        </div>
+
+        <div class="flex justify-end">
+          <a href="#" class="text-sm text-pink-600 hover:text-pink-700 font-medium">Quên mật khẩu?</a>
+        </div>
+
+        <button type="submit"
+          class="ripple-btn w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 text-white px-6 py-3.5 rounded-xl font-medium transition mt-5 flex items-center justify-center gap-2 shadow-lg">
+          <span>Đăng nhập</span>
+        </button>
+
+        <div class="divider">
+          <span class="text-gray-500 px-3 text-sm">hoặc</span>
+        </div>
+
+        <!-- Social Login -->
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <button type="button" id="facebookLogin" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i>
+          </button>
+
+          <button type="button" id="googleLogin" class="social-btn google">
+            <i class="fab fa-google"></i>
+          </button>
+
+          <button type="button" id="appleLogin" class="social-btn apple">
+            <i class="fab fa-apple"></i>
+          </button>
+        </div>
+
+        <div class="text-center mt-5">
+          <span class="text-gray-600">Chưa có tài khoản?</span>
+          <a href="register.html" class="text-pink-600 hover:text-pink-700 font-semibold ml-1">Đăng ký ngay</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script>
+    // Hiển thị thông báo
+    function showNotification(message, type = "success") {
+      const notification = document.createElement("div");
+      notification.className = `fixed top-4 right-4 p-4 rounded-lg ${type === "success" ? "bg-green-500" : "bg-red-500"
+        } text-white z-50 shadow-lg`;
+      notification.innerHTML = `
+        <div class="flex items-center">
+          <i class="fas ${type === "success" ? "fa-check-circle" : "fa-exclamation-circle"} mr-2"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      document.body.appendChild(notification);
+
+      // Animation
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateY(-20px)';
+      notification.style.transition = 'all 0.3s ease';
+
+      // Adjust notification position for mobile
+      if (window.innerWidth < 576) {
+        notification.classList.remove('top-4', 'right-4');
+        notification.classList.add('top-20');
+        notification.style.left = '50%';
+        notification.style.transform = 'translateX(-50%) translateY(-20px)';
+        notification.style.maxWidth = 'calc(100% - 2rem)';
+        notification.style.width = '90%';
+        notification.style.textAlign = 'center';
+      }
+
+      setTimeout(() => {
+        notification.style.opacity = '1';
+        if (window.innerWidth < 576) {
+          notification.style.transform = 'translateX(-50%) translateY(0)';
+        } else {
+          notification.style.transform = 'translateY(0)';
+        }
+      }, 10);
+
+      setTimeout(() => {
+        notification.style.opacity = '0';
+        if (window.innerWidth < 576) {
+          notification.style.transform = 'translateX(-50%) translateY(-20px)';
+        } else {
+          notification.style.transform = 'translateY(-20px)';
+        }
+
+        setTimeout(() => {
+          notification.remove();
+        }, 300);
+      }, 3000);
+    }
+
+    // Hiển thị/ẩn mật khẩu
+    document.getElementById("togglePassword").addEventListener("click", function () {
+      const pwInput = document.getElementById("password");
+      const icon = this.querySelector("i");
+      const type = pwInput.getAttribute("type") === "password" ? "text" : "password";
+      pwInput.setAttribute("type", type);
+      icon.classList.toggle("fa-eye");
+      icon.classList.toggle("fa-eye-slash");
+    });
+
+    // Ripple effect for buttons
+    document.querySelectorAll('.ripple-btn').forEach(button => {
+      button.addEventListener('click', function (e) {
+        const x = e.clientX - e.target.getBoundingClientRect().left;
+        const y = e.clientY - e.target.getBoundingClientRect().top;
+
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        this.appendChild(ripple);
+
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Xử lý đăng nhập
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const submitBtn = this.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+
+      try {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!email || !password) {
+          throw new Error('Vui lòng điền đầy đủ thông tin.');
+        }
+
+        // Lấy danh sách user từ localStorage
+        const users = JSON.parse(localStorage.getItem('teddy_users') || '[]');
+
+        // Tìm user có email và mật khẩu trùng khớp
+        const user = users.find(u => u.email === email && u.password === password);
+
+        if (!user) {
+          throw new Error('Email hoặc mật khẩu không chính xác.');
+        }
+
+        // Hiển thị thông báo thành công
+        showNotification('Đăng nhập thành công! Đang chuyển hướng...', 'success');
+
+        // Tạo thông tin đăng nhập cho user (không bao gồm password)
+        const userInfo = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar
+        };
+
+        // Tạo token giả (trong thực tế không nên làm vậy)
+        const fakeToken = btoa(JSON.stringify({
+          userId: user.id,
+          exp: new Date().getTime() + 7 * 24 * 60 * 60 * 1000 // Hết hạn sau 7 ngày
+        }));
+
+        // Lưu thông tin user và token
+        localStorage.setItem('teddy_user', JSON.stringify(userInfo));
+        localStorage.setItem('teddy_token', fakeToken);
+
+        // Tạo giỏ hàng trống nếu chưa có
+        if (!localStorage.getItem('shopping-cart')) {
+          localStorage.setItem('shopping-cart', JSON.stringify([]));
+        }
+
+        // Kiểm tra xem có redirect_after_login không
+        const redirectUrl = sessionStorage.getItem('redirect_after_login');
+
+        // Nếu có, chuyển hướng đến trang đó
+        if (redirectUrl) {
+          showNotification('Đăng nhập thành công! Đang chuyển hướng...', 'success');
+          sessionStorage.removeItem('redirect_after_login'); // Xóa thông tin chuyển hướng
+
+          // Chuyển hướng sau 2 giây
+          setTimeout(() => {
+            window.location.href = redirectUrl;
+          }, 2000);
+        } else {
+          // Nếu không có, chuyển hướng đến trang chủ
+          showNotification('Đăng nhập thành công! Đang chuyển hướng...', 'success');
+
+          // Chuyển hướng sau 2 giây
+          setTimeout(() => {
+            window.location.href = '../index.html';
+          }, 2000);
+        }
+
+      } catch (error) {
+        showNotification(error.message, 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Đăng nhập';
+      }
+    });
+
+    // Xử lý đăng nhập bằng Facebook
+    document.getElementById('facebookLogin').addEventListener('click', function () {
+      showNotification('Đang kết nối với Facebook...', 'success');
+
+      // Giả lập đăng nhập (trong thực tế sẽ dùng Facebook SDK)
+      setTimeout(() => {
+        showNotification('Tính năng đang được phát triển', 'error');
+      }, 2000);
+    });
+
+    // Xử lý đăng nhập bằng Google
+    document.getElementById('googleLogin').addEventListener('click', function () {
+      showNotification('Đang kết nối với Google...', 'success');
+
+      // Giả lập đăng nhập (trong thực tế sẽ dùng Google Sign-In)
+      setTimeout(() => {
+        showNotification('Tính năng đang được phát triển', 'error');
+      }, 2000);
+    });
+
+    // Xử lý đăng nhập bằng Apple
+    document.getElementById('appleLogin').addEventListener('click', function () {
+      showNotification('Đang kết nối với Apple...', 'success');
+
+      // Giả lập đăng nhập (trong thực tế sẽ dùng Apple Sign-In)
+      setTimeout(() => {
+        showNotification('Tính năng đang được phát triển', 'error');
+      }, 2000);
+    });
+
+    // Tối ưu cho thiết bị di động
+    function checkMobileOptimization() {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 576;
+      const isMediumScreen = window.innerWidth >= 576 && window.innerWidth < 992;
+      const isLargeScreen = window.innerWidth >= 992;
+
+      // Thêm classes dựa vào kích thước màn hình
+      if (isSmallScreen) {
+        document.body.classList.add('mobile-view');
+        document.body.classList.remove('tablet-view', 'desktop-view');
+      } else if (isMediumScreen) {
+        document.body.classList.add('tablet-view');
+        document.body.classList.remove('mobile-view', 'desktop-view');
+      } else if (isLargeScreen) {
+        document.body.classList.add('desktop-view');
+        document.body.classList.remove('mobile-view', 'tablet-view');
+      }
+
+      // Thêm class nếu là thiết bị cảm ứng
+      if (isTouchDevice) {
+        document.body.classList.add('is-touch-device');
+      }
+    }
+
+    // Kiểm tra và tối ưu cho di động khi tải trang
+    window.addEventListener('DOMContentLoaded', () => {
+      checkMobileOptimization();
+
+      // Thêm sự kiện để điều chỉnh giao diện khi xoay màn hình hoặc thay đổi kích thước
+      window.addEventListener('resize', checkMobileOptimization);
+    });
+  </script>
+
+</body>
+
+</html>
